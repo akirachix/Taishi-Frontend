@@ -8,7 +8,9 @@ export default function Home() {
 
       <Layout>
        
-       {}
+       <div>
+        
+       </div>
       </Layout>
       
     </div>
