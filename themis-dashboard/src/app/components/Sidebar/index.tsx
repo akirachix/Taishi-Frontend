@@ -3,7 +3,8 @@
 'use client';
 
 import React from 'react';
-import { Home, Briefcase, Calendar, User } from 'lucide-react';
+import Image from 'next/image';
+import { Home, Briefcase, Calendar,} from 'lucide-react';
 import { useSidebar } from '../../hooks/useSidebar';
 
 const sidebarItems = [
@@ -20,7 +21,7 @@ const Sidebar = () => {
     <div className="w-64 bg-[#083317] h-screen text-white p-4 flex flex-col">
       <div className="mb-12 flex justify-center items-center">
         <div className="w-16 h-16 mt-10 flex items-center justify-center">
-          <img
+          <Image
             src="/themislogo.png" 
             alt="Themis.ai Logo"
             width={72}
