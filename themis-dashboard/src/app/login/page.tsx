@@ -123,7 +123,7 @@ const Login = () => {
               Sign In with Google
             </Button>
           </Link>
-            <p className="text-sm">Don't have an account? <a href="/signup" className="text-green-700 hover:underline">Sign Up</a></p>
+          <p>Don&#39;t have an account? <a href="/signup" className="text-green-700 hover:underline">Sign Up</a></p>
             <a href="/api/auth/logout"> Logout</a>
             {/* <div>User : {JSON.stringify(user)}</div> */}
 
