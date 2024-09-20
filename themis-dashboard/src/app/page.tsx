@@ -1,20 +1,22 @@
+"use client"
 
-import JudgeDashboardPage from "./judgeHomepage/page";
 
-import Layout from "./Layout";
+import Layout from "./(judge)/judge/Layout";
+
 
 export default function Home() {
   return (
     <div>
+       
 
       <Layout>
-       
        <div>
-       <JudgeDashboardPage/>
+       
+        
 
        </div>
       </Layout>
-      
+
     </div>
   );
 }

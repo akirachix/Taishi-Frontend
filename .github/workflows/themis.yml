@@ -26,6 +26,7 @@ jobs:
       - name: Install dependencies
         working-directory: ./themis-dashboard
         run: npm install
+        
       - name: Disable Next.js Telemetry
         working-directory: ./themis-dashboard
         run: echo "NEXT_TELEMETRY_DISABLED=1" >> .env  # Disable telemetry by adding to .env
