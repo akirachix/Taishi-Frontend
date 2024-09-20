@@ -11,7 +11,7 @@ import {
   Tooltip,
   ResponsiveContainer,
   Legend,
-  LegendProps,
+  DefaultLegendContentProps, // Import DefaultLegendContentProps
 } from 'recharts';
 
 // Define the type of chart supported by the component
@@ -23,9 +23,6 @@ interface DataPoint {
   value: number;
   value2?: number; // Optional second value for multi-bar charts
 }
-
-// Define a custom interface for Legend Entry
-
 
 // Define the interface for the props of DashboardCard
 interface DashboardCardProps {
@@ -45,7 +42,7 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
 }) => {
   
   // Custom Legend Renderer
-  const renderCustomLegend = (props: LegendProps) => {
+  const renderCustomLegend = (props: DefaultLegendContentProps) => { // Use DefaultLegendContentProps
     const { payload } = props;
 
     // Ensure payload is defined and has entries
