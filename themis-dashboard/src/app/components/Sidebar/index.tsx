@@ -5,7 +5,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { Home, Briefcase, Calendar,} from 'lucide-react';
-import { useSidebar } from '../../hooks/useSidebar';
+import { useSidebar } from '@/app/(judge)/judge/hooks/useSidebar';
 
 const sidebarItems = [
   { icon: Home, label: 'Home', path: '/' },

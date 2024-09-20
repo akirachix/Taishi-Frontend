@@ -12,6 +12,9 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      screens:{
+        'nh': {'min': '1000px', 'max': '1279px'}
+      },
       fontFamily: {
         josefin: ['"Josefin Sans"', 'sans-serif'],
       },
