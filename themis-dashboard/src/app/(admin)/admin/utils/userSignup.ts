@@ -10,7 +10,6 @@ const url = 'api/signup';
 
 export const userSignup = async (userData: UserData) => {
     try {
-        const baseUrl = process.env.BASE_URL;
         const response = await fetch(url, {
             method: 'POST',
             headers: {

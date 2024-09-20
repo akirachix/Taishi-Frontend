@@ -34,11 +34,6 @@ interface DashboardCardProps {
 }
 
 // Custom type for Legend payload, matching the recharts expected structure
-interface CustomLegendPayload {
-  value: string;
-  color: string;
-  type: string;
-}
 
 const DashboardCard: React.FC<DashboardCardProps> = ({
   title,
