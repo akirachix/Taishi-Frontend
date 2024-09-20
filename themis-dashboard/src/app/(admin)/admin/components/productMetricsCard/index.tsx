@@ -25,10 +25,7 @@ interface DataPoint {
 }
 
 // Define a custom interface for Legend Entry
-interface LegendEntry {
-  color: string;
-  value: string;
-}
+
 
 // Define the interface for the props of DashboardCard
 interface DashboardCardProps {
