@@ -97,7 +97,7 @@ const CaseId = () => {
       <header className="bg-white p-4 border-b nest-hub:p-3">
         <div className="mt-[-2%] flex items-center">
 
-             <Link href="/cases/">
+             <Link href="/judge/cases/">
              <button>
   
           <ChevronLeft size={24} className="mr-2  text-orange-500 disabled:text-gray-300 nesthub:w-5 nesthub:h-5" />

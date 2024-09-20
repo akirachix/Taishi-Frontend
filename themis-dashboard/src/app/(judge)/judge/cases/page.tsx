@@ -176,7 +176,7 @@ const Cases = () => {
                       key={index}
                       className={`${index % 2 === 0 ? "bg-white" : "bg-gray-200"} hover:bg-gray-400 cursor-pointer`}
                     >
-                      <Link href={`/cases/${caseItem.caseNo}`} className="contents">
+                      <Link href={`/judge/cases/${caseItem.caseNo}`} className="contents">
                         <td className="p-3 sm:p-3">{caseItem.caseNo}</td>
                         <td className="p-3 sm:p-3">{caseItem.title}</td>
                         <td className="p-3 sm:p-3">{caseItem.accuracy}</td>
