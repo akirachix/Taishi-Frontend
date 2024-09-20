@@ -5,18 +5,7 @@ import Link from "next/link";
 import Layout from "../Layout";
 
 
-const statusStyle = (status: string) => {
-  switch (status) {
-    case "OPEN CASE":
-      return "text-[12px] flex justify-center w-24 bg-orange-200 font-extrabold text-orange-800";
-    case "CLOSED CASE":
-      return "text-[12px] flex justify-center w-24 bg-green-200 font-extrabold text-green-800";
-    default:
-      return "text-[12px] flex justify-center w-24 bg-orange-200 text-yellow-800"; 
-  }
-};
-
-export const cases = [
+const cases = [
   {
     caseNo: "CASE22465",
     title: "Irungii Khoikho Khamati",
@@ -34,7 +23,15 @@ export const cases = [
     status: "OPEN CASE",
   },
   {
-    caseNo: "CASE545",
+    caseNo: "CASE22475",
+    title: "Irungii Khoikho Khamati",
+    accuracy: "80%",
+    date: "26th August 2023",
+    time: "22:45hrs",
+    status: "CLOSED CASE",
+  },
+  {
+    caseNo: "CASE595",
     title: "Idi Amin",
     accuracy: "80%",
     date: "2 January 2017",
@@ -42,7 +39,15 @@ export const cases = [
     status: "OPEN CASE",
   },
   {
-    caseNo: "CASE545",
+    caseNo: "CASE22485",
+    title: "Irungii Khoikho Khamati",
+    accuracy: "80%",
+    date: "26th August 2023",
+    time: "22:45hrs",
+    status: "CLOSED CASE",
+  },
+  {
+    caseNo: "CASE586",
     title: "Idi Amin",
     accuracy: "80%",
     date: "2 January 2017",
@@ -50,64 +55,34 @@ export const cases = [
     status: "OPEN CASE",
   },
   {
-    caseNo: "CASE545",
-    title: "Idi Amin",
+    caseNo: "CASE22455",
+    title: "Irungii Khoikho Khamati",
     accuracy: "80%",
-    date: "2 January 2017",
-    time: "13:45hrs",
-    status: "OPEN CASE",
+    date: "26th August 2023",
+    time: "22:45hrs",
+    status: "CLOSED CASE",
   },
   {
-    caseNo: "CASE545",
+    caseNo: "CASE525",
     title: "Idi Amin",
     accuracy: "80%",
     date: "2 January 2017",
     time: "13:45hrs",
     status: "OPEN CASE",
   },
-  {
-    caseNo: "CASE545",
-    title: "Idi Amin",
-    accuracy: "80%",
-    date: "2 January 2017",
-    time: "13:45hrs",
-    status: "OPEN CASE",
-  },
-  {
-    caseNo: "CASE545",
-    title: "Idi Amin",
-    accuracy: "80%",
-    date: "2 January 2017",
-    time: "13:45hrs",
-    status: "OPEN CASE",
-  },
-  {
-    caseNo: "CASE545",
-    title: "Idi Amin",
-    accuracy: "80%",
-    date: "2 January 2017",
-    time: "13:45hrs",
-    status: "OPEN CASE",
-  },
-  {
-    caseNo: "CASE545",
-    title: "Idi Amin",
-    accuracy: "80%",
-    date: "2 January 2017",
-    time: "13:45hrs",
-    status: "OPEN CASE",
-  },
-  {
-    caseNo: "CASE545",
-    title: "Idi Amin",
-    accuracy: "80%",
-    date: "2 January 2017",
-    time: "13:45hrs",
-    status: "OPEN CASE",
-  },
+  
 ];
 
-export const getFirstThreeCases = () => cases.slice(0, 3);
+const statusStyle = (status: string) => {
+  switch (status) {
+    case "OPEN CASE":
+      return "text-[12px] flex justify-center w-24 bg-orange-200 font-extrabold text-orange-800";
+    case "CLOSED CASE":
+      return "text-[12px] flex justify-center w-24 bg-green-200 font-extrabold text-green-800";
+    default:
+      return "text-[12px] flex justify-center w-24 bg-orange-200 text-yellow-800";
+  }
+};
 
 const Cases = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -118,8 +93,8 @@ const Cases = () => {
     return cases.filter(
       (caseItem) =>
         caseItem.caseNo.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      caseItem.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      caseItem.status.toLowerCase().includes(searchTerm.toLowerCase())
+        caseItem.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        caseItem.status.toLowerCase().includes(searchTerm.toLowerCase())
     );
   }, [searchTerm]);
 
@@ -129,15 +104,10 @@ const Cases = () => {
 
   const paginate = (pageNumber: React.SetStateAction<number>) => setCurrentPage(pageNumber);
 
-  // const caseStats = useMemo(() => {
-  //   const open = filteredCases.filter((caseItem) => caseItem.status === "OPEN CASE").length;
-  //   const closed = filteredCases.filter((caseItem) => caseItem.status === "CLOSED CASE").length;
-  //   return { openCases: open, closedCases: closed };
-  // }, [filteredCases]);
-
   return (
     <Layout>
       <div className="p-4 sm:p-8 bg-white">
+        {/* Your page content */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
           <h1 className="text-xl sm:text-2xl font-bold text-[#F99D15] mb-4 sm:mb-0">Cases</h1>
           <div className="flex items-center space-x-6">

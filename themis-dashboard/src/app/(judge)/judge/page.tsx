@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Bell, User } from "lucide-react";
 import Link from "next/link";
 import Layout from './Layout';
-import { getFirstThreeCases} from './cases/page'; 
+import { getFirstThreeCases } from './cases/data/cases';
 
 const statusStyle = (status: string) => {
   switch (status) {
