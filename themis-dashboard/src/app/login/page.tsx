@@ -7,8 +7,8 @@ import { useRouter } from "next/navigation";
 import { userLogin } from "../utils/userLogin";
 import Link from "next/link";
 import { Button } from "@nextui-org/react";
-import Image from 'next/image'
-
+import { FiEye, FiEyeOff } from 'react-icons/fi';
+import { FcGoogle } from 'react-icons/fc';
 
 
 
@@ -83,16 +83,17 @@ const Login = () => {
               />
               {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>}
               <button
-                type="button"
-                onClick={togglePasswordVisibility}
-                className="absolute inset-y-1 right-4 flex items-center text-sm leading-5"
-              >
-                {passwordVisible ? (
-                  <Image src="/images/open_eye.png" alt="Hide password" className="w-10 h-6 relative inset-y-3" />
-                ) : (
-                  <Image src="/images/closed_eye.png" alt="Show password" className="w-10 h-6 relative inset-y-3" />
-                )}
-              </button>
+  type="button"
+  onClick={togglePasswordVisibility}
+  className="absolute inset-y-1 right-4 flex items-center text-sm leading-5"
+>
+  {passwordVisible ? (
+    <FiEye size={24} className="text-gray-600 relative inset-y-3" />
+  ) : (
+    <FiEyeOff size={24} className="text-gray-600 relative inset-y-3" />
+  )}
+</button>
+
             </div>
 
             <div className="flex justify-center">
@@ -119,7 +120,7 @@ const Login = () => {
 
           <Link href="/api/auth/login">
             <Button color="primary"  className="w-full flex justify-center items-center text-sm mb-3">
-              <Image src="/images/google-icon.png" alt="Google Icon" className="w-5 h-5 mr-2" />
+            <FcGoogle size={20} className="mr-2" /> {/* Adjust the size as needed */}
               Sign In with Google
             </Button>
           </Link>

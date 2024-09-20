@@ -22,7 +22,7 @@ const Sidebar = () => {
       <div className="mb-12 flex justify-center items-center">
         <div className="w-16 h-16 mt-10 flex items-center justify-center">
           <Image
-            src="/themislogo.png" 
+            src="/images/themislogo.png" 
             alt="Themis.ai Logo"
             width={72}
             height={78}

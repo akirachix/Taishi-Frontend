@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useRouter } from "next/navigation";
 import { userSignup } from "@/app/utils/userSignup";
-import Image from "next/image";
+import { FiEye, FiEyeOff } from 'react-icons/fi';
 
 // Define validation schema using Yup
 const signupSchema = yup.object().shape({
@@ -164,20 +164,17 @@ const Signup = () => {
                 </p>
               )}
               <button
-                type="button"
-                onClick={togglePasswordVisibility}
-                className="absolute inset-y-1 right-4 flex items-center text-sm leading-5"
-              >
-                <Image
-                  src={
-                    passwordVisible
-                      ? "/images/open_eye.png"
-                      : "/images/closed_eye.png"
-                  }
-                  alt="Toggle password visibility"
-                  className="w-10 h-6 relative inset-y-4"
-                />
-              </button>
+  type="button"
+  onClick={togglePasswordVisibility}
+  className="absolute inset-y-1 right-4 flex items-center text-sm leading-5"
+>
+  {passwordVisible ? (
+    <FiEye size={24} className="text-gray-600 relative inset-y-[18px]" />
+  ) : (
+    <FiEyeOff size={24} className="text-gray-600 relative inset-y-[18px]" />
+  )}
+</button>
+
             </div>
 
             <div className="relative">
@@ -200,20 +197,16 @@ const Signup = () => {
                 </p>
               )}
               <button
-                type="button"
-                onClick={toggleConfirmPasswordVisibility}
-                className="absolute inset-y-1 right-4 flex items-center text-sm leading-5"
-              >
-                <Image
-                  src={
-                    confirmPasswordVisible
-                      ? "/images/open_eye.png"
-                      : "/images/closed_eye.png"
-                  }
-                  alt="Toggle confirm password visibility"
-                  className="w-10 h-6 relative inset-y-4"
-                />
-              </button>
+  type="button"
+  onClick={toggleConfirmPasswordVisibility}
+  className="absolute inset-y-1 right-4 flex items-center text-sm leading-5"
+>
+  {confirmPasswordVisible ? (
+    <FiEye size={24} className="text-gray-600 relative inset-y-[18px]" />
+  ) : (
+    <FiEyeOff size={24} className="text-gray-600 relative inset-y-[18px]" />
+  )}
+</button>
             </div>
 
             <div className="flex justify-center">
