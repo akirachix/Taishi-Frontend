@@ -120,7 +120,7 @@ const Login = () => {
 
           <Link href="/api/auth/login">
             <Button color="primary"  className="w-full flex justify-center items-center text-sm mb-3">
-            <FcGoogle size={20} className="mr-2" /> {/* Adjust the size as needed */}
+            <FcGoogle size={20} className="mr-2" /> 
               Sign In with Google
             </Button>
           </Link>
