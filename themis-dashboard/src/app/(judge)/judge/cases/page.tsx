@@ -4,6 +4,7 @@ import { Search, Bell, User, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import Layout from "../Layout";
 
+
 const statusStyle = (status: string) => {
   switch (status) {
     case "OPEN CASE":
@@ -128,11 +129,11 @@ const Cases = () => {
 
   const paginate = (pageNumber: React.SetStateAction<number>) => setCurrentPage(pageNumber);
 
-  const caseStats = useMemo(() => {
-    const open = filteredCases.filter((caseItem) => caseItem.status === "OPEN CASE").length;
-    const closed = filteredCases.filter((caseItem) => caseItem.status === "CLOSED CASE").length;
-    return { openCases: open, closedCases: closed };
-  }, [filteredCases]);
+  // const caseStats = useMemo(() => {
+  //   const open = filteredCases.filter((caseItem) => caseItem.status === "OPEN CASE").length;
+  //   const closed = filteredCases.filter((caseItem) => caseItem.status === "CLOSED CASE").length;
+  //   return { openCases: open, closedCases: closed };
+  // }, [filteredCases]);
 
   return (
     <Layout>

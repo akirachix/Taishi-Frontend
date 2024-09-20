@@ -4,8 +4,9 @@ export async function fetchUserData() {
       throw new Error('Failed to fetch user data');
     }
     return response.json();
-  }
-  export async function updateUserProfile(data:String) {
+  };
+  
+  export async function updateUserProfile(data: string) {
     const response = await fetch('/api/user', {
       method: 'PUT',
       headers: {
@@ -17,4 +18,4 @@ export async function fetchUserData() {
       throw new Error('Failed to update user profile');
     }
     return response.json();
-  }
+  };
