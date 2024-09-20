@@ -5,10 +5,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useRouter } from "next/navigation";
 import { userLogin } from "../utils/userLogin";
-import { useUser } from "@auth0/nextjs-auth0/client";
 import Link from "next/link";
 import { Button } from "@nextui-org/react";
-
+import Image from 'next/image'
 
 
 
@@ -30,7 +29,7 @@ const Login = () => {
   const [apiError, setApiError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null); // For success message
   const [passwordVisible, setPasswordVisible] = useState(false);  // State for password visibility
-  const { user, error, isLoading } = useUser();
+ 
 
   const onSubmit = async (data: LoginFormData) => {
     try {
@@ -120,7 +119,7 @@ const Login = () => {
 
           <Link href="/api/auth/login">
             <Button color="primary"  className="w-full flex justify-center items-center text-sm mb-3">
-              <img src="/images/google-icon.png" alt="Google Icon" className="w-5 h-5 mr-2" />
+              <Image src="/images/google-icon.png" alt="Google Icon" className="w-5 h-5 mr-2" />
               Sign In with Google
             </Button>
           </Link>
