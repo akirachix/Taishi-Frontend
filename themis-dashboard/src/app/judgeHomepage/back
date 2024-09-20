@@ -1,0 +1,89 @@
+// "use client";
+
+// import React, { useState } from 'react';
+
+// const JudgeDashboardPage = () => {
+//   const [meetingLink, setMeetingLink] = useState('');
+
+//   const handleJoinMeeting = () => {
+//     console.log('Joining meeting with link:', meetingLink);
+//   };
+
+//   const pastTranscriptions = [
+//     { caseNo: 'CASE22465', title: 'Irungu Khushko Khamati', accuracy: '80%', confidence: 'Wesley Odipo', date: '20th August 2023', time: '23:49hrs', status: 'OPEN CASE' },
+//     { caseNo: 'CASE22465', title: 'Irungu Khushko Khamati', accuracy: '80%', confidence: 'Wesley Odipo', date: '20th August 2023', time: '23:49hrs', status: 'OPEN CASE' },
+//     { caseNo: 'CASE22465', title: 'Irungu Khushko Khamati', accuracy: '80%', confidence: 'Wesley Odipo', date: '20th August 2023', time: '23:49hrs', status: 'OPEN CASE' },
+//     { caseNo: 'CASE22465', title: 'Irungu Khushko Khamati', accuracy: '80%', confidence: 'Wesley Odipo', date: '20th August 2023', time: '23:49hrs', status: 'OPEN CASE' },
+//     { caseNo: 'CASE22465', title: 'Irungu Khushko Khamati', accuracy: '80%', confidence: 'Wesley Odipo', date: '20th August 2023', time: '23:49hrs', status: 'OPEN CASE' },
+//     { caseNo: 'CASE22465', title: 'Irungu Khushko Khamati', accuracy: '80%', confidence: 'Wesley Odipo', date: '20th August 2023', time: '23:49hrs', status: 'OPEN CASE' },
+//   ];
+
+//   return (
+//     <div className="bg-white p-16 nh:p-6 flex flex-col">
+//       <header className="flex justify-between items-center mb-8 nh:mb-3">
+//         <h1 className="text-2xl nh:text-lg font-bold text-yellow-500">Cases</h1>
+//         <div className="flex items-center space-x-4 nh:space-x-2">
+//           <div className="relative">
+//             <div className="rounded-full w-12 h-12 nh:w-8 nh:h-8 bg-green-800 flex items-center justify-center">
+//               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 nh:h-4 nh:w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+//                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+//               </svg>
+//             </div>
+//             <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs nh:text-[8px] rounded-full h-5 w-5 nh:h-3 nh:w-3 flex items-center justify-center">12</span>
+//           </div>
+//           <div className="w-12 h-12 nh:w-8 nh:h-8 bg-gray-300 rounded-full"></div>
+//         </div>
+//       </header>
+
+//       <main className="flex-grow flex flex-col">
+//         <div className="text-center mb-10 nh:mb-4">
+//           <h2 className="text-4xl nh:text-2xl font-semibold mb-12 nh:mb-4">Welcome Judge Amani</h2>
+//           <p className="text-xl nh:text-sm mb-12 nh:mb-4">Enter the link for the virtual hearing to proceed.</p>
+//           <div className="flex justify-center mb-10 nh:mb-4">
+//             <input
+//               type="text"
+//               placeholder="Input meeting link"
+//               className="border border-gray-300 rounded-l-md px-6 nh:px-3 py-4 nh:py-2 w-[40rem] nh:w-[24rem] text-lg nh:text-sm"
+//               value={meetingLink}
+//               onChange={(e) => setMeetingLink(e.target.value)}
+//             />
+//             <button
+//               onClick={handleJoinMeeting}
+//               className="bg-yellow-500 text-white px-4 nh:px-2 py-2 nh:py-1 rounded-r-md hover:bg-yellow-600 transition-colors text-lg nh:text-sm"
+//             >
+//               Join Meeting
+//             </button>
+//           </div>
+//         </div>
+
+//         <div className="mt-auto">
+//           <h3 className="text-4xl nh:text-xl font-semibold mb-10 nh:mb-3">Past Transcriptions</h3>
+//           <div className="overflow-x-auto">
+//             <table className="w-full border-collapse">
+//               <thead>
+//                 <tr>
+//                   {['CASE NO.', 'Title', 'Accuracy', 'Confidence', 'Date', 'Time', 'Status'].map((header) => (
+//                     <th key={header} className="px-4 nh:px-2 py-1 nh:py-0.5 text-left text-sm nh:text-[10px] font-bold text-gray-800 border-b-4 nh:border-b-2 border-yellow-500">
+//                       {header}
+//                     </th>
+//                   ))}
+//                 </tr>
+//               </thead>
+//               <tbody>
+//                 {pastTranscriptions.map((transcription, index) => (
+//                   <tr key={index} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-300'}>
+//                     {Object.values(transcription).map((value, idx) => (
+//                       <td key={idx} className="px-4 nh:px-2 py-3 nh:py-1 text-md nh:text-[10px] text-black">{value}</td>
+//                     ))}
+//                   </tr>
+//                 ))}
+//               </tbody>
+//             </table>
+//           </div>
+//         </div>
+//       </main>
+//     </div>
+//   );
+// };
+
+// export default JudgeDashboardPage;

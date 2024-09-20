@@ -30,7 +30,7 @@ const Sidebar = () => {
           />
         </div>
       </div>
-      <nav className="space-y-12 flex-grow mt-24 text-[24px]">
+      <nav className="space-y-12 flex-grow mt-24 text-[24px] nh:mt-6 nh:text-[18px]">
         {sidebarItems.map((item) => (
           <div key={item.label} className="relative">
             <button 

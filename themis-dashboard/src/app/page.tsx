@@ -1,4 +1,5 @@
 
+import JudgeDashboardPage from "./judgeHomepage/page";
 
 import Layout from "./Layout";
 
@@ -9,7 +10,8 @@ export default function Home() {
       <Layout>
        
        <div>
-        
+       <JudgeDashboardPage/>
+
        </div>
       </Layout>
       
