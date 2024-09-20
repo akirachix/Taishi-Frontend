@@ -5,12 +5,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useRouter } from "next/navigation";
 import { userLogin } from "../utils/userLogin";
+import { getCookie } from 'cookies-next';
 import Link from "next/link";
 import { Button } from "@nextui-org/react";
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { FcGoogle } from 'react-icons/fc';
-
-
 
 // Define validation schema using Yup
 const loginSchema = yup.object().shape({
@@ -27,29 +26,36 @@ const Login = () => {
   });
 
   const [apiError, setApiError] = useState<string | null>(null);
-  const [successMessage, setSuccessMessage] = useState<string | null>(null); // For success message
-  const [passwordVisible, setPasswordVisible] = useState(false);  // State for password visibility
- 
+  const [successMessage, setSuccessMessage] = useState<string | null>(null); 
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   const onSubmit = async (data: LoginFormData) => {
     try {
       const response = await userLogin(data);
       if (response.error) {
-        setApiError(response.error); // Set API error message
+        setApiError(response.error); 
       } else {
-        setSuccessMessage("Login successful! Redirecting to your dashboard..."); 
-        setTimeout(() => router.push("/components/posts"), 1500); 
+        setSuccessMessage("Login successful! Redirecting to your dashboard...");
+        
+      
+        const role = getCookie('userRole'); 
+
+        if (role === 'judge') {
+          setTimeout(() => router.push("/judge/"), 1500); 
+        } else {
+          setTimeout(() => router.push("/admin/"), 1500); 
+        } 
       }
     } catch (error) {
       setApiError((error as Error).message);
     }
   };
 
-
   // Toggle the password visibility
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
+
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100 font-josefin">
@@ -120,7 +126,7 @@ const Login = () => {
 
           <Link href="/api/auth/login">
             <Button color="primary"  className="w-full flex justify-center items-center text-sm mb-3">
-            <FcGoogle size={20} className="mr-2" /> {/* Adjust the size as needed */}
+            <FcGoogle size={20} className="mr-2" /> 
               Sign In with Google
             </Button>
           </Link>

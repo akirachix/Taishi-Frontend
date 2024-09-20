@@ -3,15 +3,6 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function POST(request: NextRequest) {
   const baseUrl = process.env.BASE_URL;
 
-  // Validate environment variable
-  if (!baseUrl) {
-    console.error('BASE_URL environment variable is not set.');
-    return NextResponse.json(
-        { error: 'An unexpected error occurred. Please try again later.' },
-        { status: 500 }
-    );
-  }
-
   try {
     const { first_name, last_name, email, password, role } = await request.json();
 
@@ -54,7 +45,7 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Parse the response and send it back to the client
+   
     const result = JSON.parse(textResponse);
     console.log('User created successfully:', result);
     return NextResponse.json(result, { status: 201 });
