@@ -14,8 +14,7 @@ import {
   LegendProps,
 } from 'recharts';
 
-
-
+// Define the type of chart supported by the component
 type ChartType = 'line' | 'bar' | 'pie';
 
 // Define the structure of the data expected for the charts
@@ -23,6 +22,12 @@ interface DataPoint {
   name: string;
   value: number;
   value2?: number; // Optional second value for multi-bar charts
+}
+
+// Define a custom interface for Legend Entry
+interface LegendEntry {
+  color: string;
+  value: string;
 }
 
 // Define the interface for the props of DashboardCard
@@ -34,8 +39,6 @@ interface DashboardCardProps {
   showLegend?: boolean; // Optional: Control legend visibility
 }
 
-// Custom type for Legend payload, matching the recharts expected structure
-
 const DashboardCard: React.FC<DashboardCardProps> = ({
   title,
   type,
@@ -43,13 +46,17 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
   chartProps,
   showLegend = true,
 }) => {
+  
   // Custom Legend Renderer
   const renderCustomLegend = (props: LegendProps) => {
     const { payload } = props;
-    if (!payload) return null;
+
+    // Ensure payload is defined and has entries
+    if (!payload || !Array.isArray(payload)) return null;
+
     return (
       <ul className="flex space-x-4">
-        {payload.map((entry: any, index: number) => (
+        {payload.map((entry, index) => (
           <li key={`item-${index}`} className="flex items-center space-x-2">
             <span
               style={{ backgroundColor: entry.color }}
