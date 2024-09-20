@@ -14,7 +14,8 @@ import {
   LegendProps,
 } from 'recharts';
 
-// Define the type of chart supported by the component
+
+
 type ChartType = 'line' | 'bar' | 'pie';
 
 // Define the structure of the data expected for the charts
