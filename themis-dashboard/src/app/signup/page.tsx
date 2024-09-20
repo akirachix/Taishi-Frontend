@@ -5,6 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useRouter } from "next/navigation";
 import { userSignup } from "@/app/utils/userSignup";
+import Image from "next/image";
 
 // Define validation schema using Yup
 const signupSchema = yup.object().shape({
@@ -167,7 +168,7 @@ const Signup = () => {
                 onClick={togglePasswordVisibility}
                 className="absolute inset-y-1 right-4 flex items-center text-sm leading-5"
               >
-                <img
+                <Image
                   src={
                     passwordVisible
                       ? "/images/open_eye.png"
@@ -203,7 +204,7 @@ const Signup = () => {
                 onClick={toggleConfirmPasswordVisibility}
                 className="absolute inset-y-1 right-4 flex items-center text-sm leading-5"
               >
-                <img
+                <Image
                   src={
                     confirmPasswordVisible
                       ? "/images/open_eye.png"

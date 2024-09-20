@@ -88,9 +88,9 @@ const Login = () => {
                 className="absolute inset-y-1 right-4 flex items-center text-sm leading-5"
               >
                 {passwordVisible ? (
-                  <img src="/images/open_eye.png" alt="Hide password" className="w-10 h-6 relative inset-y-3" />
+                  <Image src="/images/open_eye.png" alt="Hide password" className="w-10 h-6 relative inset-y-3" />
                 ) : (
-                  <img src="/images/closed_eye.png" alt="Show password" className="w-10 h-6 relative inset-y-3" />
+                  <Image src="/images/closed_eye.png" alt="Show password" className="w-10 h-6 relative inset-y-3" />
                 )}
               </button>
             </div>
