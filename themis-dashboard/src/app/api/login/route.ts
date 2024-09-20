@@ -4,13 +4,7 @@ export async function POST(request: NextRequest) {
   const baseUrl = process.env.BASE_URL;
 
   // Validate environment variable
-  if (!baseUrl) {
-    console.error('BASE_URL environment variable is not set.');
-    return NextResponse.json(
-      { error: 'BASE_URL environment variable is not set.' },
-      { status: 500 }
-    );
-  }
+
 
   try {
     const { email, password } = await request.json();

@@ -5,6 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useRouter } from "next/navigation";
 import { userSignup } from "@/app/utils/userSignup";
+import { setCookie } from 'cookies-next';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 
 // Define validation schema using Yup
@@ -51,6 +52,9 @@ const Signup = () => {
       if (response.error) {
         setApiError(response.error);
       } else {
+        
+        setCookie('userRole', formattedData.role, { maxAge: 60 * 60 * 24, path: '/' });
+
         setSuccessMessage("Account created successfully! Taking you to login..."); 
         setTimeout(() => router.push("/login"), 1500); 
       }

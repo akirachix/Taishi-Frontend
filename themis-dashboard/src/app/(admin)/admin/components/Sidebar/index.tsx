@@ -1,17 +1,14 @@
-
-
 'use client';
 
 import React from 'react';
 import Image from 'next/image';
 import { Home, Briefcase, Calendar,} from 'lucide-react';
-import { useSidebar } from '@/app/(judge)/judge/hooks/useSidebar';
+import { useSidebar } from '../../hooks/useSidebar';
 
 const sidebarItems = [
-  { icon: Home, label: 'Home', path: '/judge/' },
-  { icon: Briefcase, label: 'Cases', path: '/judge/cases' },
-  { icon: Calendar, label: 'Hearings', path: '/judge/hearings' },
-  { icon: null, label: 'Profile', path: '/judge/profile' },
+  { icon: Home, label: 'Dashboard', path: '/admin/' },
+  { icon: Briefcase, label: 'Model Metrics', path: '/admin/model-metrics' },
+  { icon: Calendar, label: 'Product Metrics', path: '/admin/product-metrics' },
 ];
 
 const Sidebar = () => {
@@ -22,7 +19,7 @@ const Sidebar = () => {
       <div className="mb-12 flex justify-center items-center">
         <div className="w-16 h-16 mt-10 flex items-center justify-center">
           <Image
-            src="/images/themislogo.png" 
+            src="/themislogo.png" 
             alt="Themis.ai Logo"
             width={72}
             height={78}
@@ -30,7 +27,7 @@ const Sidebar = () => {
           />
         </div>
       </div>
-      <nav className="space-y-12 flex-grow mt-24 text-[24px] nh:mt-6 nh:text-[18px]">
+      <nav className="space-y-12 flex-grow mt-24 text-[24px]">
         {sidebarItems.map((item) => (
           <div key={item.label} className="relative">
             <button 
