@@ -1,9 +1,10 @@
+
+
 "use client";
 
 import React, { useState, useMemo } from "react";
 import { Search, Bell, User, ChevronLeft, ChevronRight } from "lucide-react";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
-
 import Link from "next/link";
 import Layout from "../Layout";
 
@@ -26,7 +27,7 @@ const HearingsDashboard = () => {
     id: number;
   }
 
-  const hearingsData:Omit<Hearing, "id">[] = [
+  const hearingsData: Omit<Hearing, "id">[] = [
     {
       caseNo: "CASE22465",
       title: "Irungii Khoikho Khamati",
@@ -137,8 +138,9 @@ const HearingsDashboard = () => {
 
   const COLORS = ["#F99D15", "#083317"];
 
+  
   const renderPieChart = (
-    data: PieChartData[] ,
+    data: PieChartData[],
     count: string | number,
     label: string,
     percentage: string | number
@@ -158,7 +160,7 @@ const HearingsDashboard = () => {
               startAngle={90}
               endAngle={-270}
             >
-              {data.map((entry: any, index: number) => (
+              {data.map((entry: PieChartData, index: number) => (
                 <Cell
                   key={`cell-${index}`}
                   fill={COLORS[index % COLORS.length]}
@@ -267,38 +269,36 @@ const HearingsDashboard = () => {
               ))}
               {filteredHearings.length === 0 && searchTerm && (
                 <div className="text-center py-4 text-red-500 ml-72">
-                  No results found for "{searchTerm}"
+                  No results found for &quot;{searchTerm}&quot;
                 </div>
               )}
             </tbody>
           </table>
           <div className="flex flex-col sm:flex-row justify-between items-center p-4 ">
-  {filteredHearings.length > 0 && (
-    <>
-      <button
-        onClick={() => paginate(currentPage - 1)}
-        disabled={currentPage === 1}
-        className="flex items-center text-[#F99D15] disabled:text-gray-300 mb-2 sm:mb-0"
-      >
-        <ChevronLeft className="mr-2" /> Previous
-      </button>
-      <span className="mb-2 sm:mb-0">
-        {currentPage} of {Math.ceil(filteredHearings.length / itemsPerPage)}
-      </span>
-      <button
-        onClick={() => paginate(currentPage + 1)}
-        disabled={
-          currentPage === Math.ceil(filteredHearings.length / itemsPerPage)
-        }
-        className="flex items-center text-[#F99D15] disabled:text-gray-300"
-      >
-        Next <ChevronRight className="ml-2" />
-      </button>
-    </>
-  )}
-</div>
-          
-          
+            {filteredHearings.length > 0 && (
+              <>
+                <button
+                  onClick={() => paginate(currentPage - 1)}
+                  disabled={currentPage === 1}
+                  className="flex items-center text-[#F99D15] disabled:text-gray-300 mb-2 sm:mb-0"
+                >
+                  <ChevronLeft className="mr-2" /> Previous
+                </button>
+                <span className="mb-2 sm:mb-0">
+                  {currentPage} of {Math.ceil(filteredHearings.length / itemsPerPage)}
+                </span>
+                <button
+                  onClick={() => paginate(currentPage + 1)}
+                  disabled={
+                    currentPage === Math.ceil(filteredHearings.length / itemsPerPage)
+                  }
+                  className="flex items-center text-[#F99D15] disabled:text-gray-300"
+                >
+                  Next <ChevronRight className="ml-2" />
+                </button>
+              </>
+            )}
+          </div>
         </div>
       </div>
     </Layout>
