@@ -80,10 +80,7 @@ const ProductMetrics = () => {
               <option value="Average Processing Time">Average Processing Time</option>
             </select>
 
-            <div className="relative">
-              <img src="/notification-bell.png" alt="Notifications" className="w-12 h-12" />
-            </div>
-            <img src="/profile-picture.png" alt="User Profile" className="w-10 h-10 rounded-full" />
+      
           </div>
         </div>
 

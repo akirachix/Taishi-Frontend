@@ -11,6 +11,7 @@ import {
   Tooltip,
   ResponsiveContainer,
   Legend,
+  LegendProps,
 } from 'recharts';
 
 // Define the type of chart supported by the component
@@ -32,6 +33,13 @@ interface DashboardCardProps {
   showLegend?: boolean; // Optional: Control legend visibility
 }
 
+// Custom type for Legend payload, matching the recharts expected structure
+interface CustomLegendPayload {
+  value: string;
+  color: string;
+  type: string;
+}
+
 const DashboardCard: React.FC<DashboardCardProps> = ({
   title,
   type,
@@ -40,7 +48,7 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
   showLegend = true,
 }) => {
   // Custom Legend Renderer
-  const renderCustomLegend = (props: any) => {
+  const renderCustomLegend = (props: LegendProps) => {
     const { payload } = props;
     if (!payload) return null;
     return (

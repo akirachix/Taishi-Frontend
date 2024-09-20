@@ -86,7 +86,7 @@ const ModelMetrics = () => {
         </div>
         <div className="mt-4 p-6 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-900 rounded">
           <h2 className="font-bold">Overview</h2>
-          <p>These are metrics that will be used to monitor our model's performance, highlighting its speed (latency), accuracy (WER), and reliability (confidence score).</p>
+          <p>These are metrics that will be used to monitor our model&#39;s performance, highlighting its speed (latency), accuracy (WER), and reliability (confidence score).</p>
         </div>
       </div>
     </Layout>

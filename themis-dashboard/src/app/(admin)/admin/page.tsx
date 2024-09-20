@@ -3,7 +3,7 @@ import useMetrics from './hooks/useDasboard';
 import DashboardCard from '@/app/(admin)/admin/components/adminDashboardCard';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCaretDown, faFilter, faBell } from '@fortawesome/free-solid-svg-icons';
+import { faCaretDown, faFilter} from '@fortawesome/free-solid-svg-icons';
 import Layout from './Layout';
 
 const Dashboard = () => {
@@ -47,12 +47,6 @@ const Dashboard = () => {
                 <FontAwesomeIcon icon={faCaretDown} className="ml-2" />
               </button>
             </div>
-            {/* Notification bell and profile picture */}
-            <div className="relative">
-              <span className="absolute top-0 right-0 bg-red-600 text-white text-xs rounded-full px-1">12</span>
-              <FontAwesomeIcon icon={faBell} className="text-2xl text-gray-700" />
-            </div>
-            <img src="/profile-picture.png" alt="User Profile" className="w-10 h-10 rounded-full border-2 border-gray-300" />
           </div>
         </div>
 
