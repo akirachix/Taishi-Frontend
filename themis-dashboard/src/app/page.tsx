@@ -1,10 +1,10 @@
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation"; // Import the useRouter hook
+import { useRouter } from "next/navigation"; 
 
 const LandingPage = () => {
   const [meetingLink, setMeetingLink] = useState("");
-  const router = useRouter(); // Initialize the router
+  const router = useRouter(); 
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMeetingLink(e.target.value);
@@ -12,27 +12,27 @@ const LandingPage = () => {
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle meeting link submission logic here
+   
     console.log("Meeting Link Submitted:", meetingLink);
   };
 
-  // Function to navigate to the signup page
+  
   const handleContinue = () => {
-    router.push("/signup"); // Replace with the correct path to your signup page
+    router.push("/signup"); 
   };
 
   return (
     <div className="relative flex items-center justify-center min-h-screen bg-black font-josefin">
-      {/* Background Image */}
+    
       <div
         className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: "url('/images/landing_image.jpg')" }} // Add your background image path
+        style={{ backgroundImage: "url('/images/landing_image.jpg')" }} 
       ></div>
 
-      {/* Dark Overlay */}
+     
       <div className="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center">
         <div className=" w-[950px] h-[620px] bg-black bg-opacity-50 rounded-[50px] ">
-          {/* Content */}
+        
           <div className="relative z-10 text-center text-white p-8">
             <h1 className="text-[50px] mt-[80px] font-bold mb-6 leading-none">WELCOME TO THEMIS AI</h1>
             <p className="text-[40px] mb-10 leading-tight">
@@ -40,7 +40,7 @@ const LandingPage = () => {
               <span>Effortlessly with us.</span>
             </p>
 
-            {/* Meeting Link Input Form */}
+            
             <form
               onSubmit={handleFormSubmit}
               className="flex items-center justify-center mb-6"

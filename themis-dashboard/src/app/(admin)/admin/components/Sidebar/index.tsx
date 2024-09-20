@@ -9,7 +9,6 @@ const sidebarItems = [
   { icon: Home, label: 'Dashboard', path: '/admin/' },
   { icon: Briefcase, label: 'Model Metrics', path: '/admin/model-metrics' },
   { icon: Calendar, label: 'Product Metrics', path: '/admin/product-metrics' },
-  { icon: null, label: 'Profile', path: '/admin/profile' },
 ];
 
 const Sidebar = () => {
