@@ -2,9 +2,10 @@
 "use client";
 import React, { useState } from 'react';
 import { Bell, ChevronLeft, User } from 'lucide-react';
-import { FaUserCircle } from 'react-icons/fa';
-import Layout from '@/app/Layout';
+
+
 import Link from 'next/link';
+import Layout from '../../Layout';
 
 const CaseId = () => {
   const [activeSection, setActiveSection] = useState('Brief Facts');
@@ -16,7 +17,7 @@ const CaseId = () => {
         <p>
         The applicants lodged the instant application with the European Court of Human Rights on September 6, 2007 challenging the denial of their right to marry as same sex couples.
         In May 2004, the applicants submitted a marriage application to the civil registry department of Bègles municipal council. Following the application, the municipal civil registrar published the banns of marriage. The public prosecutor at the Bordeaux tribunal de grande instance served notice of his objection to the marriage on the municipal civil registrar and the applicants. Despite the objection, the mayor of Bègles performed the marriage ceremony and made an entry to that effect in the register of births, marriages and deaths.
-        On June 22, 2004 the public prosecutor brought proceedings against the applicants in the Bordeaux tribunal de grande instance seeking to have the marriage annulled. On 27 July 2004 the court annulled the applicants' marriage and ordered its judgment to be recorded in the margin of their birth certificates and the marriage certificate. The Bordeaux Court of Appeal upheld the judgment. Thereafter, the applicants appealed on points of law to the Court of Cassation which on March 13, 2007 dismissed their appeal.
+        On June 22, 2004 the public prosecutor brought proceedings against the applicants in the Bordeaux tribunal de grande instance seeking to have the marriage annulled. On 27 July 2004 the court annulled the applicants marriage and ordered its judgment to be recorded in the margin of their birth certificates and the marriage certificate. The Bordeaux Court of Appeal upheld the judgment. Thereafter, the applicants appealed on points of law to the Court of Cassation which on March 13, 2007 dismissed their appeal.
         Consequently, the applicants brought the instant application. They based their application on articles 12 and 14 of the European Convention on Human Rights, 1953 (Convention). They argued that limiting marriage to opposite sex couples amounted to discrimination and infringed on their right to marry. They contended that they had been discriminated against on the basis of their sexual orientation contrary to articles 8 and 14 of the Convention.
         </p>
       </div>
@@ -92,7 +93,7 @@ const CaseId = () => {
             </div>
           </div>
 
-      {/* Header */}
+     
       <header className="bg-white p-4 border-b nest-hub:p-3">
         <div className="mt-[-2%] flex items-center">
 
@@ -109,7 +110,7 @@ const CaseId = () => {
         </div>
       </header>
 
-      {/* Case content */}
+    
       <div className="p-4 nh:text-[12px]">
         <h2 className="nh:mt-[-2%] text-xl shadow-md font-semibold mt-2 nh:text-[14px]">Case Introduction</h2>
         <div className="bg-gray-300 ml-4 h-36 rounded-2xl mt-6 w-[80%] shadow-md p-4 mb-4 flex nh:h-20">
@@ -125,7 +126,7 @@ September 6, 2016</p>
           </div>
         </div>
 
-        {/* Section Tabs */}
+       
         <div className="flex gap-[10%] nh:mt-2   border-b ">
           {sections.map((section) => (
             <button

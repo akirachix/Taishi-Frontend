@@ -118,7 +118,7 @@ const Cases = () => {
 
   const paginate = (pageNumber: React.SetStateAction<number>) => setCurrentPage(pageNumber);
 
-  const { openCases, closedCases } = useMemo(() => {
+  useMemo(() => {
     const open = filteredCases.filter((caseItem) => caseItem.status === "OPEN CASE").length;
     const closed = filteredCases.filter((caseItem) => caseItem.status === "CLOSED CASE").length;
     return { openCases: open, closedCases: closed };
