@@ -1,6 +1,6 @@
+"use client"
 
-
-import Layout from "./Layout";
+import Layout from "./(judge)/judge/Layout";
 
 
 export default function Home() {
@@ -9,12 +9,12 @@ export default function Home() {
        
 
       <Layout>
-       
        <div>
         
+
        </div>
       </Layout>
-      
+
     </div>
   );
 }
