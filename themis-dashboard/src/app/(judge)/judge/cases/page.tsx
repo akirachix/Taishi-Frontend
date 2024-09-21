@@ -107,7 +107,7 @@ const Cases = () => {
   return (
     <Layout>
       <div className="p-4 sm:p-8 bg-white">
-        {/* Your page content */}
+      
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
           <h1 className="text-xl sm:text-2xl font-bold text-[#F99D15] mb-4 sm:mb-0">Cases</h1>
           <div className="flex items-center space-x-6">
@@ -122,7 +122,7 @@ const Cases = () => {
         </div>
 
         <div className="bg-white rounded-lg shadow">
-          <div className="flex items-center nh:p-1 p-2 sm:p-4 border nh:mt-6 mt-36 border-gray-400 rounded-full mb-4 w-full sm:w-2/4">
+          <div className="flex nhm:mt-[10%] items-center nh:p-1 p-2 sm:p-4 border nh:mt-6 mt-36 border-gray-400 rounded-full mb-4 w-full sm:w-2/4">
             <Search className="text-gray-500 mr-2" />
             <input
               type="text"
@@ -179,7 +179,7 @@ const Cases = () => {
               </tbody>
             </table>
 
-            <div className="flex mt-10 flex-row justify-between items-center p-4">
+            <div className="flex nh:mt-[3%] mt-10 flex-row justify-between nh:p-1 items-center p-4">
               {filteredCases.length > 0 && (
                 <>
                   <button

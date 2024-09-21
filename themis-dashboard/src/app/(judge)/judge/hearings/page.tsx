@@ -182,7 +182,7 @@ const HearingsDashboard = () => {
     <Layout>
       <div className="p-4 pb-8 sm:p-8 bg-white nh:p-2">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 nh:h-6 nh:mb-0">
-          <h1 className="text-xl sm:text-2xl font-bold text-[#D38816] mb-4 sm:mb-0">
+          <h1 className="text-xl sm:text-2xl font-bold text-[#F99D15] mb-4 sm:mb-0">
             Hearings
           </h1>
           <div className="flex items-center space-x-6">

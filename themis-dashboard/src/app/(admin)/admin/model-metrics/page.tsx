@@ -3,7 +3,7 @@ import { useState } from 'react';
 import DashboardCard from '@/app/(admin)/admin/components/modelMetricsCard';
 import Layout from '../Layout';
 
-// Dummy data for illustration (use your actual data fetching logic)
+
 const dummyMetrics = {
   latency: [
     { name: '1', value: 0.65 },
@@ -34,12 +34,11 @@ const dummyMetrics = {
 const ModelMetrics = () => {
   const [selectedMetric, setSelectedMetric] = useState('All');
 
-  // Function to handle metric selection
   const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedMetric(event.target.value);
   };
 
-  // Function to render charts based on selected metric
+  
   const renderCharts = () => {
     switch (selectedMetric) {
       case 'Latency':
@@ -64,8 +63,8 @@ const ModelMetrics = () => {
 
   return (
     <Layout>
-      <div className="p-5">
-        <div className="flex items-center justify-between mb-4">
+      <div>
+        <div className="flex items-center justify-between">
           <h1 className="text-3xl font-bold text-yellow-800">Model Metrics</h1>
           <div className="relative">
             <select

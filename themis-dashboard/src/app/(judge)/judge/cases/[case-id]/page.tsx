@@ -83,7 +83,7 @@ const CaseId = () => {
     <Layout>
     <div className="mt-20 ml-4 flex-1 bg-white ">
    
-      <div className="nh:mt-[-10%] nh:ml-[86%] flex ml-[88%] mt-[-4] items-center space-x-6">
+      <div className="nhm:mt-[-6%]  nh:mt-[-10%] nh:ml-[86%] flex ml-[88%] mt-[-4] items-center space-x-6">
             <div className="relative bg-[#083317] p-2 rounded-full">
               <Bell className="w-6 h-6 text-white" />
               <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">27</span>
@@ -94,13 +94,13 @@ const CaseId = () => {
           </div>
 
      
-      <header className="bg-white p-4 border-b nest-hub:p-3">
+      <header className="bg-white p-4 border-b nh:p-3">
         <div className="mt-[-2%] flex items-center">
 
              <Link href="/judge/cases/">
              <button>
   
-          <ChevronLeft size={24} className="mr-2  text-orange-500 disabled:text-gray-300 nesthub:w-5 nesthub:h-5" />
+          <ChevronLeft size={24} className="mr-2  text-orange-500 disabled:text-gray-300 n" />
           </button>
            </Link>
 
@@ -111,7 +111,7 @@ const CaseId = () => {
       </header>
 
     
-      <div className="p-4 nh:text-[12px]">
+      <div className="nh:text-[12px]">
         <h2 className="nh:mt-[-2%] text-xl shadow-md font-semibold mt-2 nh:text-[14px]">Case Introduction</h2>
         <div className="bg-gray-300 ml-4 h-36 rounded-2xl mt-6 w-[80%] shadow-md p-4 mb-4 flex nh:h-20">
           <div className="flex-1 mt-6 ml-8 pr-4 nh:mt-[-1%] border-r border-gray-400 ">
