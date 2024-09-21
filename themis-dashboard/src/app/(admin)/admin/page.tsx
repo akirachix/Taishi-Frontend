@@ -8,8 +8,7 @@ import Layout from './Layout';
 
 const Dashboard = () => {
   const { metrics, loading, error } = useMetrics();
-  const [timeFilter, setTimeFilter] = useState('Weekly'); // State for the time filter
-
+  const [timeFilter, setTimeFilter] = useState('Weekly'); 
   if (loading) {
     return (
       <div className="flex items-center justify-center w-full h-screen p-5">
@@ -26,17 +25,15 @@ const Dashboard = () => {
     );
   }
 
-  // Determine the data set to display based on the selected filter
   const selectedData = timeFilter === 'Weekly' ? metrics?.weekly : metrics?.monthly;
 
   return (
     <Layout>
-      <div className="p-5">
-        {/* Header section with filter and profile */}
-        <div className="flex items-center justify-between mb-4">
+      <div className="p-4">
+        <div className="flex items-center justify-between">
           <h1 className="text-3xl font-bold text-yellow-800">Dashboard</h1>
           <div className="flex items-center space-x-4">
-            {/* Time filter dropdown */}
+          
             <div className="relative inline-block text-left">
               <button
                 onClick={() => setTimeFilter((prev) => (prev === 'Weekly' ? 'Monthly' : 'Weekly'))}
@@ -50,7 +47,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Cards section */}
+     
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
           {selectedData ? (
             <>
@@ -63,17 +60,9 @@ const Dashboard = () => {
             <p>No data available</p>
           )}
         </div>
-
-        {/* Bottom card for the overview */}
-        <div className="mt-4 p-6 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-900 rounded">
+        <div className="mt-2 p-6 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-900 rounded">
           <h2 className="font-bold">Overview</h2>
-          <p>These are product metrics used to monitor the performance of Themis AI.</p>
-          <ul className="list-disc ml-4 mt-2">
-            <li>Active Users</li>
-            <li>Latency</li>
-            <li>Generated Case Briefs</li>
-            <li>Confidence Score</li>
-          </ul>
+          <p>These are a cllection of metrics used to monitor Themis AI including model metrics and product metrics.</p>
         </div>
       </div>
     </Layout>

@@ -34,7 +34,7 @@ import Link from 'next/link';
                                                     readOnly className="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-100 px-3 py-2" /> 
                                                     </div> 
 
-                                                    <Link href="https://themis-informational.vercel.app/">
+                                                    <Link href="https://themis-informational.vercel.app/" target="_blank">
                                                     <button className="w-full bg-green-900 text-white py-4 px-6 rounded-md hover:bg-green-800 transition duration-300 text-[24px]"> About </button>
                                                     </Link>
                                                      </div> 
