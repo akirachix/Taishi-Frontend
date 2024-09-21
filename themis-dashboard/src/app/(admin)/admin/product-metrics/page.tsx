@@ -64,8 +64,8 @@ const ProductMetrics = () => {
 
   return (
     <Layout>
-      <div className="p-5">
-        <div className="flex items-center justify-between mb-4">
+      <div className="p-4">
+        <div className="flex items-center justify-between mb-2">
           <h1 className="text-3xl font-bold text-yellow-800">Product Metrics</h1>
           <div className="flex items-center space-x-4">
             <select
@@ -88,15 +88,9 @@ const ProductMetrics = () => {
           {renderCharts()}
         </div>
 
-        <div className="mt-4 p-6 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-900 rounded">
+        <div className=" p-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-900 rounded">
           <h2 className="font-bold">Overview</h2>
-          <p>These are product metrics used to monitor Themis AI performance.</p>
-          <ul className="list-disc ml-4 mt-2">
-            <li>Active Users</li>
-            <li>Number of Signups</li>
-            <li>Generated Casebriefs</li>
-            <li>Average Processing Time</li>
-          </ul>
+          <p>These are product metrics used to monitor Themis AI performance ie active users, number of signups, generated casebriefs, average processing time etc.</p>
         </div>
       </div>
     </Layout>

@@ -8,7 +8,8 @@ const config: Config = {
   theme: {
     extend: {
       screens: {
-        'nh': {'min': '1000px', 'max': '1279px'}
+        'nh': {'min': '1000px', 'max': '1279px'},
+        'nhm':{'min': '1280px'}
       },
       colors: {
         background: "var(--background)",

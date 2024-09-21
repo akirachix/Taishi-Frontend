@@ -27,7 +27,7 @@ const JudgeDashboardPage = () => {
 
   return (
     <Layout>
-      <div className="bg-white xl:p-16 nh:p-0 flex flex-col">
+      <div className="bg-white nh:p-0 flex flex-col">
         <header className="flex justify-between items-center mb-8 nh:mb-0">
           <h1 className="text-2xl nh:text-lg font-bold text-yellow-500">Home</h1>
           <div className="flex items-center space-x-4 nh:space-x-2">
@@ -67,7 +67,7 @@ const JudgeDashboardPage = () => {
           </div>
 
           <div className="mt-auto">
-            <h3 className="text-3xl  nh:text-xl nm:text-[20px] font-semibold  nh:mb-3">Recent Cases</h3>
+            <h3 className="text-3xl nh:text-xl nm:text-[20px] font-semibold ">Recent Cases</h3>
             <div className="overflow-x-auto">
               <table className="nh:mt-2 w-full lg:mt-10 text-sm sm:text-base nh:text-[12px]">
                 <thead>

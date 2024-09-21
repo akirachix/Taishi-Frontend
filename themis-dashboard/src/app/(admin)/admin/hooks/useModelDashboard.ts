@@ -1,4 +1,4 @@
-// src/app/hooks/useModelMetrics.ts
+
 import { useEffect, useState } from 'react';
 
 interface DataPoint {
@@ -21,7 +21,7 @@ const useModelMetrics = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Mock data with the correct structure
+      
         const mockData: Metrics = {
           latency: [
             { name: '1', value: 0.5 },
@@ -50,7 +50,7 @@ const useModelMetrics = () => {
           ],
         };
 
-        setMetrics(mockData); // Set the mock data
+        setMetrics(mockData); 
         setLoading(false);
       } catch (err) {
         setError('Failed to fetch model metrics data');

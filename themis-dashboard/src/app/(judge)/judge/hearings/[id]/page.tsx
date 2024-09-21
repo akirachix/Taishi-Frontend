@@ -89,9 +89,9 @@ export default function HearingDetailPage({ params }: { params: { id: string } }
     <Layout>
       <div className="flex items-center mb-2 nh:pb-40">
           <button onClick={() => router.back()} className="mr-4">
-            <ArrowLeft className="text-[#D38816]" />
+            <ArrowLeft className="text-[#F99D15]" />
           </button>
-          <h1 className="text-xl nh:text-xl font-bold text-[#D38816]">Hearings</h1>
+          <h1 className="text-xl nh:text-xl font-bold text-[#F99D15]">Hearings</h1>
         </div>
       <div className="flex flex-col items-center justify-center mt-52 p-4 nh:mt-12">
         <AlertCircle className="w-16 h-16 text-red-500 mb-4" />
@@ -106,9 +106,9 @@ export default function HearingDetailPage({ params }: { params: { id: string } }
       <div className="p-4 md:p-8 bg-white nh:p-1">
         <div className="flex items-center mb-6 nh:mb-0 nh:mt-0">
           <button onClick={() => router.back()} className="mr-4">
-            <ArrowLeft className="text-[#D38816]" />
+            <ArrowLeft className="text-[#F99D15]" />
           </button>
-          <h1 className="text-xl md:text-2xl font-bold text-[#D38816]">Hearings</h1>
+          <h1 className="text-xl md:text-2xl font-bold text-[#F99D15]">Hearings</h1>
         </div>
 
         <div className="bg-gray-200 p-4 mb-6 rounded-lg nh:mb-0">
