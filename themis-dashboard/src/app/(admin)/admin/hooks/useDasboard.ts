@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 
-// Define the structure of the data expected for the charts
+
 export interface DataPoint {
   name: string;
   value: number;
 }
 
-// Define the interface for the metrics data
+
 interface MetricsData {
   latency: DataPoint[];
   activeUsers: DataPoint[];
@@ -14,7 +14,7 @@ interface MetricsData {
   confidenceScore: DataPoint[];
 }
 
-// Dummy data to simulate fetching metrics data
+
 const weeklyMetricsData: MetricsData = {
   latency: [
     { name: 'T1', value: 10 },
@@ -71,14 +71,14 @@ const useMetrics = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Simulate fetching data with a timeout
+   
     const fetchData = async () => {
       try {
-        // Simulate network delay
+      
         setTimeout(() => {
           setMetrics({ weekly: weeklyMetricsData, monthly: monthlyMetricsData });
           setLoading(false);
-        }, 1000); // 1-second delay to simulate loading
+        }, 1000); 
       } catch (error) {
         setError('Failed to load data');
         setLoading(false);

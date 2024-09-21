@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-// Define the structure of the metrics data
+
 interface MetricsData {
   activeUsers: { name: string; value: number }[];
   activeUsersVsSignups: { name: string; value: number }[];
@@ -9,12 +9,12 @@ interface MetricsData {
 }
 
 const useProductMetrics = () => {
-  const [metrics, setMetrics] = useState<MetricsData | null>(null); // Set the type for metrics
+  const [metrics, setMetrics] = useState<MetricsData | null>(null); 
   const [loading, setLoading] = useState(true);
   const [error] = useState<string | null>(null);
 
   useEffect(() => {
-    // Dummy data to use instead of fetching from an API
+  
     const mockData: MetricsData = {
       activeUsers: [
         { name: 'Week 1', value: 30 },
@@ -46,11 +46,11 @@ const useProductMetrics = () => {
       ],
     };
 
-    // Simulate data fetching delay
+  
     setTimeout(() => {
       setMetrics(mockData);
       setLoading(false);
-    }, 1000); // Delay to mimic real data fetching
+    }, 1000); 
 
   }, []);
 
