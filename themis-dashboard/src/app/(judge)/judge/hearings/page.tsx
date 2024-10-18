@@ -2,7 +2,7 @@
 
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { Search, Bell, User, ChevronLeft, ChevronRight } from "lucide-react";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import Link from "next/link";
@@ -178,6 +178,15 @@ const HearingsDashboard = () => {
     </div>
   );
 
+  const [avatar, setAvatar] = useState('/ladyjustice.png'); // Default avatar
+
+  useEffect(() => {
+    const storedAvatar = localStorage.getItem('avatar');
+    if (storedAvatar) {
+      setAvatar(storedAvatar);
+    }
+  }, []);
+
   return (
     <Layout>
       <div className="p-4 pb-8 sm:p-8 bg-white nh:p-2">
@@ -185,18 +194,13 @@ const HearingsDashboard = () => {
           <h1 className="text-xl sm:text-2xl font-bold text-[#F99D15] mb-4 sm:mb-0">
             Hearings
           </h1>
-          <div className="flex items-center space-x-6">
-            <div className="relative bg-[#083317] p-2 rounded-full">
-              <Bell className="w-6 h-6 text-white" />
-              <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
-                27
-              </span>
-            </div>
-
-            <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
-              <User className="w-6 h-6 text-gray-600" />
-            </div>
-          </div>
+          <div className="w-12 h-12 nh:w-8 nh:h-8 bg-gray-300 rounded-full flex items-center justify-center overflow-hidden">
+        {avatar ? (
+          <img src={avatar} alt="User Avatar" className="w-full h-full object-cover" />
+        ) : (
+          <User className="w-6 h-6 nh:w-4 nh:h-4 text-gray-600" />
+        )}
+      </div>
         </div>
 
         <div className="flex flex-col sm:flex-row justify-between mb-6 nh:mb-0">

@@ -1,7 +1,7 @@
 
 
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Bell, User } from "lucide-react";
 import Image from 'next/image';
 import Layout from './Layout';
@@ -97,6 +97,15 @@ const JudgeDashboardPage = () => {
   const handleJoinMeeting = () => {
     console.log('Joining meeting with link:', meetingLink);
   };
+     
+  const [avatar, setAvatar] = useState('/ladyjustice.png'); // Default avatar
+
+  useEffect(() => {
+    const storedAvatar = localStorage.getItem('avatar');
+    if (storedAvatar) {
+      setAvatar(storedAvatar);
+    }
+  }, []);
 
   return (
     <Layout>
@@ -105,9 +114,13 @@ const JudgeDashboardPage = () => {
           <h1 className="text-3xl font-bold text-yellow-500">Home</h1>
           <div className="flex items-center space-x-6">
             
-            <div className="w-14 h-14 bg-gray-300 rounded-full flex items-center justify-center">
-              <User className="w-7 h-7 text-gray-600" />
-            </div>
+          <div className="w-12 h-12 nh:w-8 nh:h-8 bg-gray-300 rounded-full flex items-center justify-center overflow-hidden">
+        {avatar ? (
+          <img src={avatar} alt="User Avatar" className="w-full h-full object-cover" />
+        ) : (
+          <User className=" nh:w-4 nh:h-4 text-gray-600" />
+        )}
+      </div>
           </div>
         </header>
 

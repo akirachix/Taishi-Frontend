@@ -1,5 +1,4 @@
 
-
 "use client";
 import React, { useState, useEffect } from "react";
 // import { fetchS3Files } from '@/app/utils/usefiles'; 
@@ -150,6 +149,7 @@ const ProfilePage = () => {
 
   const handleAvatarSelect = (avatar: string) => {
     setSelectedAvatar(avatar);
+    localStorage.setItem('avatar', avatar);
     setIsEditing(false);
   };
   if (loading) {
@@ -166,14 +166,6 @@ const ProfilePage = () => {
   
 
   const pendingCases = judgeProfile.totalCases - judgeProfile.transcribedCases;
-
-
-  // const getCurrentDate = () => {
-  //   const options = {  year: 'numeric', month: 'numeric', day: 'numeric' };
-  //   return new Date().toLocaleDateString('en-US', options);
-  // };
-  
-
 
   return (
     <Layout>
@@ -251,7 +243,7 @@ const ProfilePage = () => {
           </div>
         )}
 
-        <div className="flex flex-col nh:mt-[1%] nh:gap-6 mt-[6%] nh:ml-[-5%] ml-[-7%] mr-[-6%] md:flex-row gap-16">
+        <div className="flex flex-col nh:mt-[1%] nh:gap-6 mt-[0.5%] nh:ml-[-5%] ml-[-7%] mr-[-6%] md:flex-row gap-16">
           {/* Profile Section */}
           <div className="md:w-1/3 bg-white-900 nh:p-2 p-6 shadow-2xl rounded-lg" >
             <div className="relative">
@@ -271,7 +263,7 @@ const ProfilePage = () => {
             </div>
 
             <div className="text-center">
-              <div className="space-y-4 mt-[28%]">
+              <div className="space-y-4 mt-[24%]">
                 <h2 className="text-3xl nh:text-xl font-semibold">{judgeProfile.name}</h2>
                 <p className="text-[16px] nh:text-sm ">{judgeProfile.email}</p>
                 <p className="text-[16px] nh:text-sm">
@@ -294,11 +286,7 @@ const ProfilePage = () => {
         <FaClipboardCheck className="nh:mt-6  w-12 h-12 nh:w-6 nh:h-6 mx-auto mb-4" />
         <h3 className="text-lg font-semibold mb-2">Transcribed Cases</h3>
 
-        {/* <div>
-      {transcribedCases.map((caseItem) => (
-        <div key={caseItem.id}>{caseItem.title}</div> // Assuming each case has an id and title
-      ))}
-    </div> */}
+      
 {transcribedCases && transcribedCases.transcribed_cases ? (
   transcribedCases.transcribed_cases.map((caseItem) => (
     <div key={caseItem.id}>{caseItem.title}</div>
@@ -309,8 +297,6 @@ const ProfilePage = () => {
 </p>
 
 )}
-        {/* <p className="text-3xl nh:text-xl mt-4 font-bold">{transcribedCases}</p> */}
-
       </div>
     </div>
 
@@ -336,19 +322,8 @@ const ProfilePage = () => {
       </div>
     </div> */}
 
-
-
-      {/* <div className="bg-green-200 shadow-2xl rounded-lg nh:p-1 nh:h-36 nh:w-56 p-4 py-28 h-48 flex flex-col items-center justify-center relative overflow-hidden">
-    <div className="relative mb-8 z-10 text-center">
-      <FaCalendar className="nh:mt-6 w-12 h-12 nh:w-6 nh:h-6 mx-auto mb-4" />
-      <h3 className="text-lg font-semibold mb-2">Current Date</h3>
-      <p className="text-xl nh:text-lg mt-4 font-bold">{getCurrentDate()}</p>
-    </div>
-  </div> */}
   </div> 
-
-
-        
+       
 
             {/* Recent Cases */}
              <div className="bg-white-900 mt-10  shadow-2xl nh:p-1 nh:w-[95%] rounded-lg p-8">
@@ -389,7 +364,7 @@ const ProfilePage = () => {
             <div className={`mt-8 p-6 nh:mt-[-8%] rounded-lg`}>
             <button
           onClick={startNewTranscription}
-         className="mt-6 nh:ml-[-2%] w-full bg-green-700 text-white py-4 px-4 nh:p-2 rounded hover:bg-green-800 transition-colors"
+         className="mt-4 nh:ml-[-2%] w-full bg-green-700 text-white py-4 px-4 nh:p-2 rounded hover:bg-green-800 transition-colors"
         >Start New Transcription
         </button>    
              </div>
@@ -427,9 +402,6 @@ const ProfilePage = () => {
   );
 };
 export default ProfilePage;
-
-
-
 
 
 
