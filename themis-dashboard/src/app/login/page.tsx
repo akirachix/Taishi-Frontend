@@ -5,9 +5,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useRouter } from "next/navigation";
 import { userLogin } from "../utils/userLogin";
-import { getCookie } from 'cookies-next';
+import { getCookie, setCookie } from 'cookies-next';
 import Link from "next/link";
-import { Button } from "@nextui-org/react";
+import { Button, user } from "@nextui-org/react";
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { FcGoogle } from 'react-icons/fc';
 
@@ -35,6 +35,8 @@ const Login = () => {
       if (response.error) {
         setApiError(response.error); 
       } else {
+        const userData = response.user;
+        setCookie("userData", JSON.stringify(userData));
         setSuccessMessage("Login successful! Redirecting to your dashboard...");
         
       

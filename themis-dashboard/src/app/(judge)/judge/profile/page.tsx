@@ -2,7 +2,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 // import { fetchS3Files } from '@/app/utils/usefiles'; 
-// import { createTranscription } from '@/app/utils/transcription'; 
+import { createTranscription } from '@/app/utils/transcription'; 
 import { Doughnut } from 'react-chartjs-2';
 
 import Layout from "../Layout";
@@ -42,9 +42,7 @@ interface TranscribedCasesResponse {
     title: string;
   }>;
 }
-interface S3File {
-  filename: string;
-}
+
 
 const ProfilePage = () => {
   const [judgeProfile, setJudgeProfile] = useState<JudgeProfile | null>(null);
@@ -56,13 +54,15 @@ const ProfilePage = () => {
   const [showModal, setShowModal] = useState(false);
   const [caseName, setCaseName] = useState('');
   const [caseNumber, setCaseNumber] = useState('');
-  const [audioFile, setAudioFile] = useState('');
-  const [s3Files, setS3Files] = useState<S3File[]>([]);
+  // const [audioFile, setAudioFile] = useState('');
+  // const [s3Files, setS3Files] = useState<S3File[]>([]);
   const [loadingFiles, setLoadingFiles] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
   const [transcribedCases, setTranscribedCases] = useState<TranscribedCasesResponse | null>(null);
   const [error, setError] = useState<Error | null>(null);
+  const [audioFile, setAudioFile] = useState<File | null>(null); // Store the local file 
+  const [uploadStatus, setUploadStatus] = useState<string | null>(null); // To track the status of the upload
 
   useEffect(() => {
     const dummyData: JudgeProfile = {
@@ -98,53 +98,74 @@ const ProfilePage = () => {
   }, []); // Empty dependency array means this effect runs once on mount
 
   
-  useEffect(() => {
-    const loadS3Files = async () => {
+  // useEffect(() => {
+  //   const loadS3Files = async () => {
 
-    if (showModal) {
-        setLoadingFiles(true);
-        try {
-          const files = await fetchS3Files();
-          setS3Files(files);
-        } catch (error) {
-          console.error("Error fetching S3 files:", error);
-          setApiError("Failed to load S3 files.");
-        } finally {
-          setLoadingFiles(false);
-        }
-      };
-      loadS3Files();
+  //   if (showModal) {
+  //       setLoadingFiles(true);
+  //       try {
+  //         const files = await fetchS3Files();
+  //         setS3Files(files);
+  //       } catch (error) {
+  //         console.error("Error fetching S3 files:", error);
+  //         setApiError("Failed to load S3 files.");
+  //       } finally {
+  //         setLoadingFiles(false);
+  //       }
+  //     };
+  //     loadS3Files();
+  //   }
+  // }, [showModal]);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setAudioFile(e.target.files[0]);
     }
-  }, [showModal]);
-
-
+  };
 
  
   const startNewTranscription = () => {
     setShowModal(true);
   };
-
   const handleAddCaseAudio = async () => {
-    setIsSubmitting(true); // Set the isSubmitting state to true
-    setApiError(null); // Reset any previous errors
-    const transcriptionData = {
-        audio_file: audioFile,  
-        case_name: caseName,    
-        case_number: caseNumber 
-    };
-    try {
-        // Call the API to create a new transcription
-        await createTranscription(transcriptionData);
-        alert('Transcription process started successfully.');
-        setShowModal(false); // Close modal after adding the case
-    } catch (error) {
-        console.error('Error creating transcription:', error);
-        setApiError('Failed to create transcription.');  // Set the error message if there's an issue
-    } finally {
-        setIsSubmitting(false); // Reset the isSubmitting state
+    if (!audioFile) {
+      setApiError("Please select an audio file.");
+      return;
     }
-};
 
+    setIsSubmitting(true); 
+    setApiError(null); 
+
+    try {
+    
+      const response = await fetchWithTimeout(createTranscription(audioFile, caseName, caseNumber), 300000); // 300000ms = 5 minutes timeout
+      alert('Transcription process started successfully.');
+      setUploadStatus(`Upload successful! Transcription ID: ${response.id}`);
+      setShowModal(false)
+    } catch (error) {
+      console.error('Error creating transcription:', error);
+      setApiError('Failed to create transcription.'); 
+    } finally {
+      setIsSubmitting(false); 
+    }
+  };
+  const fetchWithTimeout = (promise: Promise<any>, timeout: number): Promise<any> => {
+    return new Promise((resolve, reject) => {
+      const timer = setTimeout(() => {
+        reject(new Error('Request timed out'));
+      }, timeout);
+
+      promise
+        .then((res) => {
+          clearTimeout(timer);
+          resolve(res);
+        })
+        .catch((err) => {
+          clearTimeout(timer);
+          reject(err);
+        });
+    });
+  };
 
 
   const handleAvatarSelect = (avatar: string) => {
@@ -173,10 +194,33 @@ const ProfilePage = () => {
        
       
 
-        {showModal && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center z-20 justify-center">
-            <div className="bg-white p-8 rounded-md w-[400px]">
+      {showModal && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+            <div className="bg-white p-8 rounded-md w-[400px] relative">
               <h2 className="text-lg font-semibold mb-4">Add Case Audio</h2>
+
+              {/* Close button (X) */}
+              <button
+                onClick={() => setShowModal(false)}  
+                className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+
+              {/* Case Name Input */}
               <div className="mb-4">
                 <label className="block text-sm mb-2">Case Name</label>
                 <input
@@ -184,9 +228,11 @@ const ProfilePage = () => {
                   className="border border-gray-300 rounded-md w-full px-3 py-2"
                   value={caseName}
                   onChange={(e) => setCaseName(e.target.value)}
-                  disabled={isSubmitting}
+                  disabled={isSubmitting} // Disable input during submission
                 />
               </div>
+
+              {/* Case Number Input */}
               <div className="mb-4">
                 <label className="block text-sm mb-2">Case Number</label>
                 <input
@@ -194,47 +240,39 @@ const ProfilePage = () => {
                   className="border border-gray-300 rounded-md w-full px-3 py-2"
                   value={caseNumber}
                   onChange={(e) => setCaseNumber(e.target.value)}
-                  disabled={isSubmitting}
+                  disabled={isSubmitting} // Disable input during submission
                 />
               </div>
+
+              {/* Audio File Input */}
               <div className="mb-4">
                 <label className="block text-sm mb-2">Audio File</label>
-                {loadingFiles ? (
-                  <p>Loading files...</p>
-                ) : (
-                  <select
-                    className="border border-gray-300 rounded-md w-full px-3 py-2"
-                    value={audioFile}
-                    onChange={(e) => setAudioFile(e.target.value)}
-                    disabled={isSubmitting || loadingFiles}
-                  >
-                    <option value="">Select an audio file</option>
-                    {s3Files.map((file, index) => (
-                      <option key={index} value={file.filename}>
-                        {file.filename}
-                      </option>
-                    ))}
-                  </select>
-                )}
+                <input
+                  type="file"
+                  className="border border-gray-300 rounded-md w-full px-3 py-2"
+                  onChange={handleFileChange}
+                  disabled={isSubmitting} // Disable input during submission
+                />
               </div>
-              {apiError && (
-                <p className="text-red-600 text-sm mb-4">{apiError}</p>
-              )}
+
+              {/* Display API error if it exists */}
+              {apiError && <p className="text-red-500 text-sm mb-4">{apiError}</p>}
+              {uploadStatus && <p className="text-green-500 text-sm mb-4">{uploadStatus}</p>}
+
               <div className="flex justify-end space-x-4">
                 <button
-                  onClick={() => setShowModal(false)}
-                  className=" bg-red-600 hover:bg-red-500 text-white px-4 py-2 rounded-md"
-                  disabled={isSubmitting}
+                  onClick={() => setShowModal(false)}  // Close the modal
+                  className="bg-gray-300 text-gray-700 px-4 py-2 rounded-md"
+                  disabled={isSubmitting} // Disable cancel button during submission
                 >
-                  Cancel
+                  Close
                 </button>
-
                 <button
                   onClick={handleAddCaseAudio}
                   className={`bg-yellow-500 text-white px-4 py-2 rounded-md ${
                     isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
                   }`}
-                  disabled={isSubmitting}
+                  disabled={isSubmitting} // Disable button during submission
                 >
                   {isSubmitting ? 'Transcribing Audio...' : 'Add Audio'}
                 </button>

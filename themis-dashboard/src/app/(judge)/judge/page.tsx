@@ -11,7 +11,8 @@ import Image from 'next/image';
 import Layout from './Layout';
 import Link from 'next/link';
 
-
+import { getCookie } from 'cookies-next';
+import { user } from '@nextui-org/react';
 
 interface Case {
   caseNo: string;
@@ -174,7 +175,9 @@ const JudgeDashboardPage = () => {
         });
     });
   };
-
+  const userData = JSON.parse(getCookie("userData") || "{}");
+  const firstName = userData.first_name || "User";
+  
   return (
     <Layout>
       <div className="bg-white flex flex-col">
@@ -184,7 +187,7 @@ const JudgeDashboardPage = () => {
 
         <main className="flex-grow flex flex-col">
            <div className="text-center mb-12">
-             <h2 className="text-4xl font-semibold mb-6">Welcome Judge Amani</h2>
+             <h2 className="text-4xl font-semibold mb-6">Welcome {firstName}</h2>
             <p className="text-xl mb-6">Enter the link for the virtual hearing to proceed.</p>
              <div className="flex justify-center mb-12">
             <input
