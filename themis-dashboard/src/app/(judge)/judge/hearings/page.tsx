@@ -49,10 +49,10 @@ const HearingsDashboard: React.FC = () => {
     );
   }, [transcriptions, searchTerm]);
 
-  // A simple icon for the meetings, this can be expanded if needed
-  const MeetingIcon = () => {
-    return <Users className="text-green-500" size={24} />;
-  };
+  // // A simple icon for the meetings, this can be expanded if needed
+  // const MeetingIcon = () => {
+  //   return <Users className="text-green-500" size={24} />;
+  // };
 
   // Function to handle row click and navigate to transcription detail page
   const handleRowClick = (id: number) => {
@@ -125,7 +125,7 @@ const HearingsDashboard: React.FC = () => {
               <table className="w-full text-sm sm:text-base nh:text-[14px]">
                 <thead className="sticky top-0 bg-gray-100">
                   <tr className="border-b-4 border-[#F99D15]">
-                    <th className="p-2 sm:p-3 text-left">Meeting Type</th>
+                    {/* <th className="p-2 sm:p-3 text-left">Meeting Type</th> */}
                     <th className="p-2 sm:p-3 text-left">CASE NO.</th>
                     <th className="p-2 sm:p-3 text-left">Title</th>
                     <th className="p-2 sm:p-3 text-left">Date</th>
@@ -142,9 +142,9 @@ const HearingsDashboard: React.FC = () => {
                         index % 2 === 0 ? "bg-white" : "bg-gray-200"
                       } hover:bg-gray-400 cursor-pointer`} // Add pointer cursor and hover effect
                     >
-                      <td className="p-2 sm:p-3">
+                      {/* <td className="p-2 sm:p-3">
                         <MeetingIcon />
-                      </td>
+                      </td> */}
                       <td className="p-2 sm:p-3">{transcription.case_number || "N/A"}</td>
                       <td className="p-2 sm:p-3">{transcription.case_name || "N/A"}</td>
                       <td className="p-2 sm:p-3">{new Date(transcription.date_created).toLocaleDateString()}</td>
@@ -180,3 +180,4 @@ const HearingsDashboard: React.FC = () => {
 };
 
 export default HearingsDashboard;
+

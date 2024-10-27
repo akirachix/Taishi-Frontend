@@ -2,60 +2,100 @@
 import { useState } from 'react';
 import DashboardCard from '@/app/(admin)/admin/components/modelMetricsCard';
 import Layout from '../Layout';
-
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const dummyMetrics = {
   latency: [
-    { name: '1', value: 0.65 },
-    { name: '2', value: 1.3 },
-    { name: '3', value: 1.95 },
-    { name: '4', value: 2.6 },
+    { name: 'Request 1', value: 0.65, date: '2024-09-02' },
+    { name: 'Request 2', value: 1.7, date: '2024-09-08' },
+    { name: 'Request 3', value: 0.95, date: '2024-09-12' },
+    { name: 'Request 4', value: 21.3, date: '2024-09-27' },
+    { name: 'Request 4', value: 21.3, date: '2024-10-18' },
+    { name: 'Request 5', value: 2.1, date: '2024-10-03' },
+    { name: 'Request 6', value: 1.9, date: '2024-10-04' },
+    { name: 'Request 7', value: 2.7, date: '2024-10-05' },
+    { name: 'Request 8', value: 3.0, date: '2024-10-06' },
   ],
   wordErrorRate: [
-    { name: 'Type A', value: 2 },
-    { name: 'Type B', value: 6 },
-    { name: 'Type C', value: 3 },
-    { name: 'Type D', value: 5 },
-    { name: 'Type E', value: 7 },
+    { name: 'English', value: 2, date: '2024-09-02' },
+    { name: 'Swahili', value: 6, date: '2024-09-08' },
+    { name: 'Long Sentences', value: 3, date: '2024-09-12' },
+    { name: 'Noisy Environment', value: 7, date: '2024-10-02' },
+    { name: 'English', value: 2, date: '2024-10-05' },
+    { name: 'Swahili', value: 6, date: '2024-10-18' },
+
   ],
   confidenceScore: [
-    { name: 'Confident', value: 85 },
-    { name: 'Uncertain', value: 15 },
+    { name: 'Confident', value: 85, date: '2024-09-02' },
+    { name: 'Uncertain', value: 15, date: '2024-10-02' },
+    { name: 'Confident', value: 75, date: '2024-09-02' },
+    { name: 'Uncertain', value: 25, date: '2024-10-02' },
   ],
   adaptability: [
-    { name: 'Type A', value: 2 },
-    { name: 'Type B', value: 4 },
-    { name: 'Type C', value: 3 },
-    { name: 'Type D', value: 2 },
-    { name: 'Type E', value: 8 },
+    { name: 'Other Cases', value: 2, date: '2024-09-02' },
+    { name: 'Civil Cases', value: 4, date: '2024-10-02' },
+    { name: 'Other Cases', value: 2, date: '2024-09-06' },
+    { name: 'Other Cases', value: 2, date: '2024-09-07' },
   ],
 };
 
+
+interface DataItem {
+  name: string;
+  value: number;
+  date: string;
+}
+
+
+
+
 const ModelMetrics = () => {
   const [selectedMetric, setSelectedMetric] = useState('All');
+  const [startDate, setStartDate] = useState<Date | null>(new Date());
+  const [endDate, setEndDate] = useState<Date | null>(new Date());
+
 
   const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedMetric(event.target.value);
   };
 
+// Update the filterDataByDate function with proper typing
+const filterDataByDate = (
+  data: DataItem[],  // Data should be an array of objects with name, value, and date fields
+  startDate: Date | null,  // startDate can be a Date or null
+  endDate: Date | null     // endDate can be a Date or null
+) => {
+  if (!startDate || !endDate) return data; // If either date is null, return the unfiltered data
+
+  return data.filter(item => {
+    const itemDate = new Date(item.date); // Convert the date string to a Date object
+    return itemDate >= startDate && itemDate <= endDate; // Filter based on the date range
+  });
+};
   
   const renderCharts = () => {
+    const filteredLatency = filterDataByDate(dummyMetrics.latency, startDate, endDate);
+    const filteredWER = filterDataByDate(dummyMetrics.wordErrorRate, startDate, endDate);
+    const filteredConfidence = filterDataByDate(dummyMetrics.confidenceScore, startDate, endDate);
+    const filteredAdaptability = filterDataByDate(dummyMetrics.adaptability, startDate, endDate);
+  
     switch (selectedMetric) {
       case 'Latency':
-        return <DashboardCard title="Latency (response time)" type="line" data={dummyMetrics.latency} />;
+        return <DashboardCard title="Latency (response time)" type="line" data={filteredLatency} />;
       case 'Word Error Rate':
-        return <DashboardCard title="Word Error Rate (WER)" type="bar" data={dummyMetrics.wordErrorRate} />;
+        return <DashboardCard title="Word Error Rate (WER)" type="bar" data={filteredWER} />;
       case 'Confidence Score':
-        return <DashboardCard title="Confidence Score" type="pie" data={dummyMetrics.confidenceScore} />;
+        return <DashboardCard title="Confidence Score" type="pie" data={filteredConfidence} />;
       case 'Adaptability':
-        return <DashboardCard title="Adaptability to Case Types" type="bar" data={dummyMetrics.adaptability} />;
+        return <DashboardCard title="Adaptability to Case Types" type="bar" data={filteredAdaptability} />;
       default:
         return (
           <>
-            <DashboardCard title="Latency (response time)" type="line" data={dummyMetrics.latency} />
-            <DashboardCard title="Word Error Rate (WER)" type="bar" data={dummyMetrics.wordErrorRate} />
-            <DashboardCard title="Confidence Score" type="pie" data={dummyMetrics.confidenceScore} />
-            <DashboardCard title="Adaptability to Case Types" type="bar" data={dummyMetrics.adaptability} />
+            <DashboardCard title="Latency (response time)" type="line" data={filteredLatency} />
+            <DashboardCard title="Word Error Rate (WER)" type="bar" data={filteredWER} />
+            <DashboardCard title="Confidence Score" type="pie" data={filteredConfidence} />
+            <DashboardCard title="Adaptability to Case Types" type="bar" data={filteredAdaptability} />
           </>
         );
     }
@@ -63,12 +103,12 @@ const ModelMetrics = () => {
 
   return (
     <Layout>
-      <div>
-        <div className="flex items-center justify-between">
+      <div  className="p-4">
+        <div className="flex items-center justify-between mb-2">
           <h1 className="text-3xl font-bold text-yellow-800">Model Metrics</h1>
-          <div className="relative">
+          <div className="flex items-center space-x-4">
             <select
-              className="p-2 rounded border border-gray-300 bg-white text-black"
+              className="p-2 rounded border border-gray-300"
               value={selectedMetric}
               onChange={handleFilterChange}
             >
@@ -80,12 +120,33 @@ const ModelMetrics = () => {
             </select>
           </div>
         </div>
+
+        <div className="flex space-x-4 mb-4">
+  <div>
+    <label>Start Date: </label>
+    <DatePicker
+      selected={startDate}
+      onChange={(date) => setStartDate(date)}
+      dateFormat="yyyy/MM/dd"
+    />
+  </div>
+  <div>
+    <label>End Date: </label>
+    <DatePicker
+      selected={endDate}
+      onChange={(date) => setEndDate(date)}
+      dateFormat="yyyy/MM/dd"
+    />
+  </div>
+</div>
+
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
           {renderCharts()}
         </div>
-        <div className="mt-4 p-6 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-900 rounded">
-          <h2 className="font-bold">Overview</h2>
-          <p>These are metrics that will be used to monitor our model&#39;s performance, highlighting its speed (latency), accuracy (WER), and reliability (confidence score).</p>
+        <div className="p-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-900 rounded">
+          <h2 className="font-bold text-[50px]">Overview</h2>
+          <p>These are metrics that monitor our model&#39;s performance, highlighting its speed (latency), accuracy (WER), and reliability (confidence score).</p>
         </div>
       </div>
     </Layout>

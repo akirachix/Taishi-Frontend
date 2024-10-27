@@ -1036,6 +1036,7 @@ const ProfilePage = () => {
   const handleAvatarSelect = (avatar: string) => {
     setSelectedAvatar(avatar);
     localStorage.setItem('avatar', avatar);
+    localStorage.setItem('avatar', avatar);
     setIsEditing(false);
   };
 
@@ -1145,6 +1146,7 @@ const ProfilePage = () => {
         )}
 
         <div className="flex flex-col nh:mt-[1%] nh:gap-6 mt-[0.5%] nh:ml-[-5%] ml-[-7%] mr-[-6%] md:flex-row gap-16">
+        <div className="flex flex-col nh:mt-[1%] nh:gap-6 mt-[0.5%] nh:ml-[-5%] ml-[-7%] mr-[-6%] md:flex-row gap-16">
           {/* Profile Section */}
           <div className="md:w-1/3 bg-white-900 nh:p-2 p-6 shadow-2xl rounded-lg">
             <div className="relative">
@@ -1164,6 +1166,7 @@ const ProfilePage = () => {
             </div>
 
             <div className="text-center">
+              <div className="space-y-4 mt-[24%]">
               <div className="space-y-4 mt-[24%]">
                 <h2 className="text-3xl nh:text-xl font-semibold">{judgeProfile.name}</h2>
                 <p className="text-[16px] nh:text-sm ">{judgeProfile.email}</p>

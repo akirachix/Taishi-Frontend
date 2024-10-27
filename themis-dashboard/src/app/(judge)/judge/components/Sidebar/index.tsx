@@ -1,3 +1,4 @@
+
 "use client";
 
 import React from "react";
@@ -40,21 +41,23 @@ const Sidebar = () => {
       <nav className="space-y-12 flex-grow mt-24 text-[24px] nh:mt-6 nh:text-[18px]">
         {sidebarItems.map((item) => (
           <div key={item.label} className="relative">
-            {/* Handle external link with Link component */}
             {item.externalLink ? (
-              <Link href={item.externalLink} passHref
-                className="flex items-center p-2 w-full text-left transition-colors">
-                  {item.icon && (
-                    <item.icon
-                      className={`mr-4 h-5 w-5 ${
-                        activePath === item.path ? "text-[#F99D15]" : "text-white"
-                      }`}
-                    />
-                  )}
-                  {!item.icon && <div className="w-5 h-5 mr-4" />}
-                  {item.label}
-                
-              </Link>
+              <a
+                href={item.externalLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center p-2 w-full text-left transition-colors"
+              >
+                {item.icon && (
+                  <item.icon
+                    className={`mr-4 h-5 w-5 ${
+                      activePath === item.path ? "text-[#F99D15]" : "text-white"
+                    }`}
+                  />
+                )}
+                {!item.icon && <div className="w-5 h-5 mr-4" />}
+                {item.label}
+              </a>
             ) : (
               <button
                 onClick={() => handleNavigation(item.path)}
