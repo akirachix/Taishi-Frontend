@@ -202,13 +202,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { AlertCircle, ArrowLeft } from 'lucide-react';
-import tinycolor from 'tinycolor2';
-import Layout from '../../Layout';
-import { getSingleTranscription } from '@/app/utils/singleTranscription';
-import { fetchDiarization } from '@/app/utils/diarization';  // Import the diarization utility function
 import tinycolor from 'tinycolor2';
 import Layout from '@/app/Layout';
 import { getSingleTranscription } from '@/app/utils/singleTranscription';
@@ -218,10 +213,10 @@ export default function HearingDetailPage({ params }: { params: { id: string } }
   const router = useRouter();
   const transcriptionId = parseInt(params.id);
   const [transcription, setTranscription] = useState<any>(null);
-  const [diarization, setDiarization] = useState<any>(null);  // Add state for diarization
+  const [diarization, setDiarization] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [activeSection, setActiveSection] = useState('Full Hearing Notes');  // Track active tab section
+  const [activeSection, setActiveSection] = useState('Full Hearing Notes');
 
   // Fetch transcription and diarization data when component mounts
   useEffect(() => {
@@ -229,36 +224,10 @@ export default function HearingDetailPage({ params }: { params: { id: string } }
       try {
         setLoading(true);
         const transcriptionData = await getSingleTranscription(transcriptionId);
-        const diarizationData = await fetchDiarization(transcriptionId);  // Fetch diarization data for the transcription
+        const diarizationData = await fetchDiarization(transcriptionId);
 
         setTranscription(transcriptionData);
-        setDiarization(diarizationData);  // Set diarization data
-      } catch (error) {
-        setError('Failed to fetch transcription or diarization data');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [transcriptionId]);
-  const transcriptionId = parseInt(params.id);
-  const [transcription, setTranscription] = useState<any>(null);
-  const [diarization, setDiarization] = useState<any>(null);  // Add state for diarization
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [activeSection, setActiveSection] = useState('Full Hearing Notes');  // Track active tab section
-
-  // Fetch transcription and diarization data when component mounts
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const transcriptionData = await getSingleTranscription(transcriptionId);
-        const diarizationData = await fetchDiarization(transcriptionId);  // Fetch diarization data for the transcription
-
-        setTranscription(transcriptionData);
-        setDiarization(diarizationData);  // Set diarization data
+        setDiarization(diarizationData);
       } catch (error) {
         setError('Failed to fetch transcription or diarization data');
       } finally {
@@ -295,15 +264,6 @@ export default function HearingDetailPage({ params }: { params: { id: string } }
   }
 
   if (!transcription) {
-  if (loading) {
-    return (
-      <Layout>
-        <p>Loading...</p>
-      </Layout>
-    );
-  }
-
-  if (error) {
     return (
       <Layout>
         <div className="flex items-center mb-2">
@@ -312,31 +272,6 @@ export default function HearingDetailPage({ params }: { params: { id: string } }
           </button>
           <h1 className="text-xl font-bold text-[#F99D15]">Hearings</h1>
         </div>
-        <div className="flex flex-col items-center justify-center mt-52 p-4">
-          <AlertCircle className="w-16 h-16 text-red-500 mb-4" />
-          <p className="text-xl font-semibold text-gray-800 text-center">{error}</p>
-        </div>
-      </Layout>
-    );
-  }
-
-  if (!transcription) {
-    return (
-      <Layout>
-        <div className="flex items-center mb-2">
-      <Layout>
-        <div className="flex items-center mb-2">
-          <button onClick={() => router.back()} className="mr-4">
-            <ArrowLeft className="text-[#F99D15]" />
-          </button>
-          <h1 className="text-xl font-bold text-[#F99D15]">Hearings</h1>
-          <h1 className="text-xl font-bold text-[#F99D15]">Hearings</h1>
-        </div>
-        <div className="flex flex-col items-center justify-center mt-52 p-4">
-          <AlertCircle className="w-16 h-16 text-red-500 mb-4" />
-          <p className="text-xl font-semibold text-gray-800 text-center">Transcription not found</p>
-        </div>
-      </Layout>
         <div className="flex flex-col items-center justify-center mt-52 p-4">
           <AlertCircle className="w-16 h-16 text-red-500 mb-4" />
           <p className="text-xl font-semibold text-gray-800 text-center">Transcription not found</p>
@@ -361,61 +296,25 @@ export default function HearingDetailPage({ params }: { params: { id: string } }
   const formatDiarizationTextWithColors = (text: string) => {
     if (!text) return '';
 
-    const speakerColorMap: { [key: string]: string } = {}; // Store color for each speaker
+    const speakerColorMap: { [key: string]: string } = {};
 
     // Find speaker tags (e.g., Speaker 1:) and apply color
     const colorizedText = text.replace(/(Speaker\s\d+:)/g, (match, speaker) => {
       const color = getColorForSpeaker(speaker, speakerColorMap);
-      return `<strong style="color: ${color};">${speaker}</strong>`;  // Speaker tags are bold and colored
+      return `<strong style="color: ${color};">${speaker}</strong>`;
     });
 
     // Split the text into paragraphs based on line breaks (\n or \r\n)
     const paragraphs = colorizedText.split(/\n+/).map((paragraph, index) => {
-      return `<p key=${index} style="color: black; margin-bottom: 16px;">${paragraph}</p>`;  // Dialogue stays black
+      return `<p key=${index} style="color: black; margin-bottom: 16px;">${paragraph}</p>`;
     });
 
-    // Return the formatted text as HTML
-    return paragraphs.join('');
-  };
-
-  // Generate random colors for each speaker tag
-  const generateRandomColor = (): string => {
-    return tinycolor.random().toHexString();
-  };
-
-  // Helper function to get a color for each speaker and map it
-  const getColorForSpeaker = (speaker: string, speakerColorMap: { [key: string]: string }) => {
-    if (!speakerColorMap[speaker]) {
-      speakerColorMap[speaker] = generateRandomColor();
-    }
-    return speakerColorMap[speaker];
-  };
-
-  const formatDiarizationTextWithColors = (text: string) => {
-    if (!text) return '';
-
-    const speakerColorMap: { [key: string]: string } = {}; // Store color for each speaker
-
-    // Find speaker tags (e.g., Speaker 1:) and apply color
-    const colorizedText = text.replace(/(Speaker\s\d+:)/g, (match, speaker) => {
-      const color = getColorForSpeaker(speaker, speakerColorMap);
-      return `<strong style="color: ${color};">${speaker}</strong>`;  // Speaker tags are bold and colored
-    });
-
-    // Split the text into paragraphs based on line breaks (\n or \r\n)
-    const paragraphs = colorizedText.split(/\n+/).map((paragraph, index) => {
-      return `<p key=${index} style="color: black; margin-bottom: 16px;">${paragraph}</p>`;  // Dialogue stays black
-    });
-
-    // Return the formatted text as HTML
     return paragraphs.join('');
   };
 
   return (
     <Layout>
-      <div className=" md:p-8 bg-white">
-        <div className="flex items-center mb-2">
-      <div className=" md:p-8 bg-white">
+      <div className="md:p-8 bg-white">
         <div className="flex items-center mb-2">
           <button onClick={() => router.back()} className="mr-4">
             <ArrowLeft className="text-[#F99D15]" />
@@ -438,21 +337,6 @@ export default function HearingDetailPage({ params }: { params: { id: string } }
               {section}
             </button>
           ))}
-        {/* Tab Selection */}
-        <div className="flex gap-[10%] border-b">
-          {['Full Hearing Notes', 'What Speakers Said'].map((section) => (
-            <button
-              key={section}
-              className={`py-2 px-4 font-semibold ${
-                activeSection === section
-                  ? 'text-orange-500 border-b-2 border-orange-500'
-                  : 'text-black'
-              }`}
-              onClick={() => setActiveSection(section)}
-            >
-              {section}
-            </button>
-          ))}
         </div>
 
         {/* Content Rendering Based on Active Section */}
@@ -461,7 +345,11 @@ export default function HearingDetailPage({ params }: { params: { id: string } }
             <div className="max-h-[755px] overflow-y-auto">
               <div
                 className="transcription-text"
-                dangerouslySetInnerHTML={{ __html: formatDiarizationTextWithColors(transcription.transcription_text || 'Transcription does not exist') }}
+                dangerouslySetInnerHTML={{
+                  __html: formatDiarizationTextWithColors(
+                    transcription.transcription_text || 'Transcription does not exist'
+                  ),
+                }}
               />
             </div>
           )}
@@ -469,40 +357,19 @@ export default function HearingDetailPage({ params }: { params: { id: string } }
           {activeSection === 'What Speakers Said' && (
             <div className="max-h-[755px] overflow-y-auto">
               {diarization?.diarization_data ? (
-                <div 
+                <div
                   className="diarization-text"
-                  dangerouslySetInnerHTML={{ __html: formatDiarizationTextWithColors(diarization.diarization_data) }}  // Use the color format function
-                />
-              ) : (
-                <p>No diarization data available.</p>
-              )}
-        {/* Content Rendering Based on Active Section */}
-        <div className="mt-4">
-          {activeSection === 'Full Hearing Notes' && (
-            <div className="max-h-[755px] overflow-y-auto">
-              <div
-                className="transcription-text"
-                dangerouslySetInnerHTML={{ __html: formatDiarizationTextWithColors(transcription.transcription_text || 'Transcription does not exist') }}
-              />
-            </div>
-          )}
-
-          {activeSection === 'What Speakers Said' && (
-            <div className="max-h-[755px] overflow-y-auto">
-              {diarization?.diarization_data ? (
-                <div 
-                  className="diarization-text"
-                  dangerouslySetInnerHTML={{ __html: formatDiarizationTextWithColors(diarization.diarization_data) }}  // Use the color format function
+                  dangerouslySetInnerHTML={{
+                    __html: formatDiarizationTextWithColors(diarization.diarization_data),
+                  }}
                 />
               ) : (
                 <p>No diarization data available.</p>
               )}
             </div>
-          )}
           )}
         </div>
       </div>
     </Layout>
   );
 }
-

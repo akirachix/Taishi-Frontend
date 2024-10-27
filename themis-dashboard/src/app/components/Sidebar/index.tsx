@@ -9,8 +9,8 @@ import { useSidebar } from '@/app/(judge)/judge/hooks/useSidebar';
 
 const sidebarItems = [
   { icon: Home, label: 'Home', path: '/judge/' },
-  { icon: Calendar, label: 'Hearings', path: '/judge/hearings' },
   { icon: Briefcase, label: 'Cases', path: '/judge/cases' },
+  { icon: Calendar, label: 'Hearings', path: '/judge/hearings' },
   { icon: null, label: 'Profile', path: '/judge/profile' },
 ];
 
