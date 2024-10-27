@@ -1,9 +1,25 @@
-const url = '/api/transcribed-cases'
+const url = '/api/transcriptions/transcriptions_status_counts'
 
 export const fetchTranscribedCases = async () => {
-    const response = await fetch('http://127.0.0.1:8000/api/transcribed-cases/'); // Adjust the endpoint as needed
+  try {
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
     if (!response.ok) {
-      throw new Error('Network response was not ok');
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Failed to fetch transcriptions');
     }
-    return await response.json(); // Adjust based on your API response structure
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching transcriptions:', error);
+    throw error;
+  }
   };
+
+
+  
