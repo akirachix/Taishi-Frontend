@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+import {  NextResponse } from 'next/server';
 
 export async function GET() {
     const diarizationUrl = process.env.THEMIS_URL;  // Ensure you have the BASE_URL in your environment variables

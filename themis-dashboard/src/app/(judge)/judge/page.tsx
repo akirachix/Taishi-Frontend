@@ -1081,14 +1081,12 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { createTranscription } from '@/app/utils/transcription'; // Ensure this is the correct path to the utility function
-import { Bell, User } from "lucide-react";
 import Image from 'next/image';
 import Layout from './Layout';
 import Link from 'next/link';
 
 
 import { getCookie } from 'cookies-next';
-import { user } from '@nextui-org/react';
 
 
 interface Case {
@@ -1184,14 +1182,14 @@ const CaseCard = ({ caseItem }: { caseItem: Case }) => (
 const JudgeDashboardPage = () => {
 
 
- const [meetingLink, setMeetingLink] = useState('');
+//  const [meetingLink, setMeetingLink] = useState('');
 
 
- const handleJoinMeeting = () => {
-   console.log('Joining meeting with link:', meetingLink);
- };
+//  const handleJoinMeeting = () => {
+//    console.log('Joining meeting with link:', meetingLink);
+//  };
    
- const [avatar, setAvatar] = useState('/ladyjustice.png'); // Default avatar
+ const [, setAvatar] = useState('/ladyjustice.png'); // Default avatar
 
 
  useEffect(() => {
@@ -1277,30 +1275,24 @@ const JudgeDashboardPage = () => {
        <main className="flex-grow flex flex-col">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-semibold mb-6">Welcome {firstName}</h2>
-           <p className="text-xl mb-6">Enter the link for the virtual hearing to proceed.</p>
+           <p className="text-[22px] mb-6">Add hearing audio file.</p>
             <div className="flex justify-center mb-12">
-           <input
-               type="text"
-               placeholder="Add audio"
-               className="border border-gray-300 rounded-l-md px-5 py-3 w-96 text-lg"
-               value={meetingLink}
-               onChange={(e) => setMeetingLink(e.target.value)}
-             />
+        
              <button
            onClick={() => {
              setShowModal(true); 
              setUploadStatus(null); 
            }}
-           className="bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600"
+           className="bg-yellow-500 text-white text-[20px] w-[50%] py-4 rounded-md hover:bg-yellow-600"
          >
-           Add Hearing Audio
+           Add Audio
          </button>
            </div>
          </div>
 
 
          <div>
-           <h3 className="text-3xl font-semibold mb-6">Recent Cases</h3>
+           <h3 className="text-3xl font-semibold mb-3">Recent Cases</h3>
            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
              {cases.map((caseItem, index) => (
                <CaseCard key={index} caseItem={caseItem} />
