@@ -5,7 +5,6 @@ import React from "react";
 import Image from "next/image";
 import { Home, Briefcase, Calendar } from "lucide-react";
 import { useSidebar } from "../../hooks/useSidebar";
-import Link from "next/link";
 
 type SidebarItem = {
   icon: React.ElementType | null;

@@ -12,6 +12,7 @@ const sidebarItems = [
   { icon: Briefcase, label: 'Cases', path: '/judge/cases' },
   { icon: Calendar, label: 'Hearings', path: '/judge/hearings' },
   { icon: null, label: 'Profile', path: '/judge/profile' },
+  { icon: null, label: "About", externalLink: "https://themis-informational.vercel.app/" },
 ];
 
 const Sidebar = () => {

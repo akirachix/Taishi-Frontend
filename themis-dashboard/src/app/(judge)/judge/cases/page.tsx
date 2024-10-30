@@ -1,8 +1,9 @@
 "use client";
 import React, { useState, useMemo, useEffect } from "react";
-import { Search, Bell, User, ChevronLeft, ChevronRight } from "lucide-react";
+import { Search, User, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import Layout from "../Layout";
+import Image from "next/image";
 
 
 const cases = [
@@ -121,7 +122,9 @@ const Cases = () => {
           <h1 className="text-xl sm:text-2xl font-bold text-[#F99D15] mb-4 sm:mb-0">Cases</h1>
           <div className="w-12 h-12 nh:w-8 nh:h-8 bg-gray-300 rounded-full flex items-center justify-center overflow-hidden">
         {avatar ? (
-          <img src={avatar} alt="User Avatar" className="w-full h-full object-cover" />
+          <div>
+          <Image src={avatar} alt="User Avatar" className="w-full h-full object-cover" />
+          </div>
         ) : (
           <User className=" nh:w-4 nh:h-4 text-gray-600" />
         )}

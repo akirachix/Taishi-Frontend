@@ -34,14 +34,14 @@ const LandingPage = () => {
         <div className=" w-[950px] h-[620px] bg-black bg-opacity-50 rounded-[50px] ">
         
           <div className="relative z-10 text-center text-white p-8">
-            <h1 className="text-[50px] mt-[80px] font-bold mb-6 leading-none">WELCOME TO THEMIS AI</h1>
+            <h1 className="text-[50px] mt-[100px] font-bold mb-6 leading-none">WELCOME TO THEMIS AI</h1>
             <p className="text-[40px] mb-10 leading-tight">
               Transcribe your meetings <br />
               <span>Effortlessly with us.</span>
             </p>
 
             
-            <form
+            {/* <form
               onSubmit={handleFormSubmit}
               className="flex items-center justify-center mb-6"
             >
@@ -73,10 +73,10 @@ const LandingPage = () => {
                   </svg>
                 </button>
               </div>
-            </form>
+            </form> */}
 
            
-            <p className="text-2xl mb-4">Or</p>
+            {/* <p className="text-2xl mb-4">Or</p> */}
             <button
               onClick={handleContinue}
               className="px-[100px] py-[15px] bg-white text-black font-semibold text-[25px] rounded-[15px] hover:bg-gray-200 transition duration-200"

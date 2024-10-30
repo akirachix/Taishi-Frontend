@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect, useMemo } from 'react';
-import { Bell, User, Users } from "lucide-react";
 import Layout from "../Layout";
 import { useRouter } from 'next/navigation'; // Import useRouter hook
 import { fetchTranscriptions } from '@/app/utils/transcription';
