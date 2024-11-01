@@ -1,28 +1,18 @@
 "use client";
-import { useState } from "react";
+
 import { useRouter } from "next/navigation"; 
 
 const LandingPage = () => {
-  const [meetingLink, setMeetingLink] = useState("");
+
   const router = useRouter(); 
 
   // Handle the continue button click
   const handleContinue = () => {
     // If you need to use meetingLink for navigation or processing, do it here
-    console.log("Meeting Link:", meetingLink); // Example usage
+   
     router.push("/signup"); // Navigate to the signup page
   };
 
-  // Handle input change
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMeetingLink(e.target.value);
-  };
-
-  // Handle form submission (if needed)
-  const handleFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Meeting Link Submitted:", meetingLink);
-  };
 
   return (
     <div className="relative flex items-center justify-center min-h-screen bg-black font-josefin">
