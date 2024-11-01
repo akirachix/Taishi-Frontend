@@ -52,7 +52,7 @@ const Login = () => {
     }
   };
 
-  // Toggle the password visibility
+
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
