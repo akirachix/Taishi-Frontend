@@ -1,14 +1,14 @@
 
 "use client";
-import React, { useState, useEffect } from 'react';
-import { createTranscription } from '@/app/utils/transcription'; // Ensure this is the correct path to the utility function
-import { Bell, User } from "lucide-react";
+import React, { useState} from 'react';
+import { createTranscription } from '@/app/utils/transcription';
+
 import Image from 'next/image';
 import Layout from './Layout';
 import Link from 'next/link';
 
 import { getCookie } from 'cookies-next';
-import { user } from '@nextui-org/react';
+
 
 interface Case {
   caseNo: string;
@@ -98,36 +98,24 @@ const CaseCard = ({ caseItem }: { caseItem: Case }) => (
 
 const JudgeDashboardPage = () => {
 
-  const [meetingLink, setMeetingLink] = useState('');
+ 
 
-  const handleJoinMeeting = () => {
-    console.log('Joining meeting with link:', meetingLink);
-  };
-     
-  const [avatar, setAvatar] = useState('/ladyjustice.png'); // Default avatar
-
-  useEffect(() => {
-    const storedAvatar = localStorage.getItem('avatar');
-    if (storedAvatar) {
-      setAvatar(storedAvatar);
-    }
-  }, []);
+  
 
 
   const [caseName, setCaseName] = useState('');
   const [caseNumber, setCaseNumber] = useState('');
-  const [showModal, setShowModal] = useState(false); // State for handling modal visibility
-  const [audioFile, setAudioFile] = useState<File | null>(null); // Store the local file
+  const [showModal, setShowModal] = useState(false); 
+  const [audioFile,setAudioFile] = useState<File | null>(null); 
   const [isSubmitting, setIsSubmitting] = useState(false);  
   const [apiError, setApiError] = useState<string | null>(null); 
-  const [uploadStatus, setUploadStatus] = useState<string | null>(null); // To track the status of the upload
+  const [uploadStatus, setUploadStatus] = useState<string | null>(null); 
   
-  // Handle file selection
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
+  const handleFileChange = (e:React.ChangeEvent<HTMLInputElement>) =>{
+    if(e.target.files && e.target.files.length > 0){
       setAudioFile(e.target.files[0]);
     }
-  };
+  }
 
   // Function for handling transcription creation
   const handleAddCaseAudio = async () => {
@@ -136,12 +124,14 @@ const JudgeDashboardPage = () => {
       return;
     }
 
+ 
+
     setIsSubmitting(true); 
     setApiError(null); 
 
     try {
     
-      const response = await fetchWithTimeout(createTranscription(audioFile, caseName, caseNumber), 300000); // 300000ms = 5 minutes timeout
+      const response = await createTranscription(audioFile, caseName, caseNumber); // 300000ms = 5 minutes timeout
       alert('Transcription process started successfully.');
       setUploadStatus(`Upload successful! Transcription ID: ${response.id}`);
       setShowModal(false)
@@ -154,26 +144,11 @@ const JudgeDashboardPage = () => {
   };
 
  
-  const fetchWithTimeout = (promise: Promise<any>, timeout: number): Promise<any> => {
-    return new Promise((resolve, reject) => {
-      const timer = setTimeout(() => {
-        reject(new Error('Request timed out'));
-      }, timeout);
-
-      promise
-        .then((res) => {
-          clearTimeout(timer);
-          resolve(res);
-        })
-        .catch((err) => {
-          clearTimeout(timer);
-          reject(err);
-        });
-    });
-  };
   const userData = JSON.parse(getCookie("userData") || "{}");
   const firstName = userData.first_name || "Guest";
   
+  
+
   return (
     <Layout>
       <div className="bg-white flex flex-col">
@@ -190,8 +165,6 @@ const JudgeDashboardPage = () => {
                 type="text"
                 placeholder="Add audio"
                 className="border border-gray-300 rounded-l-md px-5 py-3 w-96 text-lg"
-                value={meetingLink}
-                onChange={(e) => setMeetingLink(e.target.value)}
               />
               <button
             onClick={() => {
@@ -294,7 +267,7 @@ const JudgeDashboardPage = () => {
                   className={`bg-yellow-500 text-white px-4 py-2 rounded-md ${
                     isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
                   }`}
-                  disabled={isSubmitting} // Disable button during submission
+                  disabled={isSubmitting} 
                 >
                   {isSubmitting ? 'Transcribing Audio...' : 'Add Audio'}
                 </button>

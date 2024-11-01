@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { userLogin } from "../utils/userLogin";
 import { getCookie,setCookie } from 'cookies-next';
 import Link from "next/link";
-import { Button, user } from "@nextui-org/react";
+import { Button} from "@nextui-org/react";
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { FcGoogle } from 'react-icons/fc';
 
