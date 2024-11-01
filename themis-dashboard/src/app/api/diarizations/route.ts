@@ -15,12 +15,11 @@ export async function GET() {
             return NextResponse.json({ error: errorData.detail || 'Failed to fetch diarized segments' }, { status: response.status });
         }
 
-        // Parse the response and return the list of diarized segments
-        const result = await response.json();
-        return NextResponse.json(result, { status: 200 });
-    } catch (error) {
-        // Handle unexpected errors
-        console.error('Error fetching diarized segments:', error);
-        return NextResponse.json({ error: 'An unexpected error occurred.' }, { status: 500 });
-    }
+
+    const transcriptions = await response.json();
+    return NextResponse.json(transcriptions, { status: 200 });
+} catch (error) {
+    console.error('Error fetching transcriptions:', error);
+    return NextResponse.json({ error: 'An unexpected error occurred.' }, { status: 500 });
+}
 }

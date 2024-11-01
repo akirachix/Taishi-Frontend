@@ -123,7 +123,7 @@ const Cases = () => {
           <div className="w-12 h-12 nh:w-8 nh:h-8 bg-gray-300 rounded-full flex items-center justify-center overflow-hidden">
         {avatar ? (
           <div>
-          <Image src={avatar} alt="User Avatar" className="w-full h-full object-cover" />
+          <Image src={avatar} alt="User Avatar" className="w-full h-full object-cover" width={100} height={100} />
           </div>
         ) : (
           <User className=" nh:w-4 nh:h-4 text-gray-600" />
