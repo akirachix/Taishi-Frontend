@@ -159,21 +159,17 @@ const JudgeDashboardPage = () => {
         <main className="flex-grow flex flex-col">
            <div className="text-center mb-12">
              <h2 className="text-4xl font-semibold mb-6">Welcome {firstName}</h2>
-            <p className="text-xl mb-6">Enter the link for the virtual hearing to proceed.</p>
+            <p className="text-xl mb-6">Add hearing audio file.</p>
              <div className="flex justify-center mb-12">
-            <input
-                type="text"
-                placeholder="Add audio"
-                className="border border-gray-300 rounded-l-md px-5 py-3 w-96 text-lg"
-              />
+            
               <button
             onClick={() => {
               setShowModal(true);  
               setUploadStatus(null);  
             }}
-            className="bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600"
+            className="bg-yellow-500 w-[50%] text-white px-4 py-4 rounded-md hover:bg-yellow-600"
           >
-            Add Hearing Audio
+            Add Audio
           </button>
             </div>
           </div>
