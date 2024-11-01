@@ -40,38 +40,7 @@ const LandingPage = () => {
               <span>Effortlessly with us.</span>
             </p>
 
-            <form onSubmit={handleFormSubmit} className="flex items-center justify-center mb-6">
-              <div className="relative">
-                <input
-                  type="text"
-                  value={meetingLink}
-                  onChange={handleInputChange}
-                  placeholder="Input meeting link"
-                  className="mt-[1.5px] px-6 py-4 w-[600px] h-[59px] rounded-[10px] text-black focus:outline-none focus:border-green-500 text-[20px] pr-20"
-                />
-                <button
-                  type="submit"
-                  className="absolute inset-y-[0.5px] right-0 w-[150px] mr-[-2px] h-[60px] bg-black rounded-r-[10px] flex items-center justify-center hover:bg-gray-800 transition duration-200"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-10 w-10 text-white"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </button>
-              </div>
-            </form>
-
-            <p className="text-2xl mb-4">Or</p>
+          
             <button
               onClick={handleContinue}
               className="px-[100px] py-[15px] bg-white text-black font-semibold text-[25px] rounded-[15px] hover:bg-gray-200 transition duration-200"
