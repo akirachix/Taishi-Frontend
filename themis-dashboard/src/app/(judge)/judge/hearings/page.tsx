@@ -6,11 +6,11 @@ import { fetchTranscriptions } from '@/app/utils/transcription';
 
 // Define the transcription interface
 interface Transcription {
-  id: number; // Make sure the transcription has an ID for routing
+  id: number; 
   case_name: string | null;
   case_number: string | null;
   audio_file: string | null;
-  status: string | null; // Status field
+  status: string | null; 
   date_created: string;
 }
 
@@ -18,9 +18,9 @@ const HearingsDashboard: React.FC = () => {
   const [transcriptions, setTranscriptions] = useState<Transcription[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [searchTerm, setSearchTerm] = useState(""); // Search term for filtering
+  const [searchTerm, setSearchTerm] = useState(""); 
 
-  const router = useRouter(); // Initialize router for navigation
+  const router = useRouter(); 
 
   // Fetch transcriptions from backend when the component loads
   useEffect(() => {
@@ -47,11 +47,6 @@ const HearingsDashboard: React.FC = () => {
         (transcription.audio_file?.toLowerCase() || "").includes(searchTerm.toLowerCase())
     );
   }, [transcriptions, searchTerm]);
-
-  // // A simple icon for the meetings, this can be expanded if needed
-  // const MeetingIcon = () => {
-  //   return <Users className="text-green-500" size={24} />;
-  // };
 
   // Function to handle row click and navigate to transcription detail page
   const handleRowClick = (id: number) => {
@@ -90,17 +85,6 @@ const HearingsDashboard: React.FC = () => {
           <h1 className="text-xl sm:text-2xl font-bold text-[#D38816] mb-4 sm:mb-0">
             Hearings
           </h1>
-          {/* <div className="flex items-center space-x-6">
-            <div className="relative bg-[#083317] p-2 rounded-full">
-              <Bell className="w-6 h-6 text-white" />
-              <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
-                27
-              </span>
-            </div>
-            <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
-              <User className="w-6 h-6 text-gray-600" />
-            </div>
-          </div> */}
         </div> }
 
         <div className="bg-white rounded-lg shadow">
@@ -124,11 +108,9 @@ const HearingsDashboard: React.FC = () => {
               <table className="w-full text-sm sm:text-base nh:text-[14px]">
                 <thead className="sticky top-0 bg-gray-100">
                   <tr className="border-b-4 border-[#F99D15]">
-                    {/* <th className="p-2 sm:p-3 text-left">Meeting Type</th> */}
                     <th className="p-2 sm:p-3 text-left">CASE NO.</th>
                     <th className="p-2 sm:p-3 text-left">Title</th>
                     <th className="p-2 sm:p-3 text-left">Date</th>
-                    <th className="p-2 sm:p-3 text-left">Recording</th>
                     <th className="p-2 sm:p-3 text-left">Status</th>
                   </tr>
                 </thead>
@@ -141,26 +123,11 @@ const HearingsDashboard: React.FC = () => {
                         index % 2 === 0 ? "bg-white" : "bg-gray-200"
                       } hover:bg-gray-400 cursor-pointer`} // Add pointer cursor and hover effect
                     >
-                      {/* <td className="p-2 sm:p-3">
-                        <MeetingIcon />
-                      </td> */}
+                      
                       <td className="p-2 sm:p-3">{transcription.case_number || "N/A"}</td>
                       <td className="p-2 sm:p-3">{transcription.case_name || "N/A"}</td>
                       <td className="p-2 sm:p-3">{new Date(transcription.date_created).toLocaleDateString()}</td>
-                      <td className="p-2 sm:p-3">
-                        {transcription.audio_file ? (
-                          <a
-                            href={transcription.audio_file}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-blue-500 underline"
-                          >
-                            Listen to Recording
-                          </a>
-                        ) : (
-                          "No recording"
-                        )}
-                      </td>
+
                       <td className="p-2 sm:p-3">{renderStatus(transcription.status)}</td>
                     </tr>
                   ))}
