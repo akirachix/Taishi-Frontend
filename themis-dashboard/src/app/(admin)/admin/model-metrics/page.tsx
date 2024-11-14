@@ -60,17 +60,17 @@ const ModelMetrics = () => {
     setSelectedMetric(event.target.value);
   };
 
-// Update the filterDataByDate function with proper typing
+
 const filterDataByDate = (
-  data: DataItem[],  // Data should be an array of objects with name, value, and date fields
-  startDate: Date | null,  // startDate can be a Date or null
-  endDate: Date | null     // endDate can be a Date or null
+  data: DataItem[],  
+  startDate: Date | null,  
+  endDate: Date | null    
 ) => {
-  if (!startDate || !endDate) return data; // If either date is null, return the unfiltered data
+  if (!startDate || !endDate) return data; 
 
   return data.filter(item => {
-    const itemDate = new Date(item.date); // Convert the date string to a Date object
-    return itemDate >= startDate && itemDate <= endDate; // Filter based on the date range
+    const itemDate = new Date(item.date);
+    return itemDate >= startDate && itemDate <= endDate; 
   });
 };
   

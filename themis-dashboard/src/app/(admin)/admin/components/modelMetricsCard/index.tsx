@@ -37,7 +37,7 @@ const ModelMetricsCard: React.FC<ModelMetricsCardProps> = ({
 }) => {
   const renderChart = () => {
     switch (type) {
-      case 'line': // Latency chart
+      case 'line': 
         return (
           <ResponsiveContainer width="100%" height={250}>
             <LineChart
@@ -51,7 +51,7 @@ const ModelMetricsCard: React.FC<ModelMetricsCardProps> = ({
                   value: 'Transcription Request', 
                   position: 'insideBottom', 
                   offset: -5,
-                  style: { fontWeight: 'bold', fill: '#333333' }, // Bold and color
+                  style: { fontWeight: 'bold', fill: '#333333' }, 
                 }} 
               />
               <YAxis 
@@ -59,7 +59,7 @@ const ModelMetricsCard: React.FC<ModelMetricsCardProps> = ({
                   value: 'Response Time (seconds)', 
                   angle: -90, 
                   position: 'insideLeft',
-                  style: { fontWeight: 'bold', fill: '#333333' }, // Bold and color
+                  style: { fontWeight: 'bold', fill: '#333333' }, 
                 }} 
               />
               <Tooltip />
@@ -67,7 +67,7 @@ const ModelMetricsCard: React.FC<ModelMetricsCardProps> = ({
             </LineChart>
           </ResponsiveContainer>
         );
-      case 'bar': // WER or Adaptability chart
+      case 'bar': 
         return (
           <ResponsiveContainer width="100%" height={250}>
             <BarChart
@@ -81,7 +81,7 @@ const ModelMetricsCard: React.FC<ModelMetricsCardProps> = ({
                   value: title === 'Adaptability to Case Types' ? 'Case Type' : 'Language Transcribed', 
                   position: 'insideBottom', 
                   offset: -5,
-                  style: { fontWeight: 'bold', fill: '#333333' }, // Bold and color
+                  style: { fontWeight: 'bold', fill: '#333333' }, 
                 }} 
               />
               <YAxis 
@@ -89,7 +89,7 @@ const ModelMetricsCard: React.FC<ModelMetricsCardProps> = ({
                   value: title === 'Adaptability to Case Types' ? 'Adaptability Score' : 'Word Error Rate (%)', 
                   angle: -90, 
                   position: 'insideLeft',
-                  style: { fontWeight: 'bold', fill: '#333333' }, // Bold and color
+                  style: { fontWeight: 'bold', fill: '#333333' }, 
                 }} 
               />
               <Tooltip />
@@ -97,7 +97,7 @@ const ModelMetricsCard: React.FC<ModelMetricsCardProps> = ({
             </BarChart>
           </ResponsiveContainer>
         );
-      case 'pie': // Confidence score pie chart
+      case 'pie':
         return (
           <ResponsiveContainer width="100%" height={250}>
             <PieChart style={{ background: '#FFFFFF', borderRadius: '8px', padding: '10px' }}>

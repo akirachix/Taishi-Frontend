@@ -1,28 +1,27 @@
 import React from 'react';
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
-// Define the type of chart supported by the component
+
 type ChartType = 'line' | 'bar' | 'pie';
 
-// Define the structure of the data expected for the charts
+
 interface DataPoint {
   name: string;
   value: number;
 }
 
-// Define the interface for the props of DashboardCard
 interface DashboardCardProps {
   title: string;
   type: ChartType;
   data: DataPoint[];
-  chartProps?: object; // Optional: Additional props to pass to the chart
+  chartProps?: object;
 }
 
-// Custom colors for the donut chart
+
 const COLORS = ['#D9822B', '#083317'];
 
 const DashboardCard: React.FC<DashboardCardProps> = ({ title, type, data, chartProps }) => {
-  // Render the correct chart based on the type prop
+ 
   const renderChart = () => {
     switch (type) {
       case 'line':

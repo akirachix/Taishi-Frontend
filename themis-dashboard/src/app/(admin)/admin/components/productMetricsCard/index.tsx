@@ -11,26 +11,26 @@ import {
   Tooltip,
   ResponsiveContainer,
   Legend,
-  DefaultLegendContentProps, // Import DefaultLegendContentProps
+  DefaultLegendContentProps, 
 } from 'recharts';
 
-// Define the type of chart supported by the component
+
 type ChartType = 'line' | 'bar' | 'pie';
 
-// Define the structure of the data expected for the charts
+
 interface DataPoint {
   name: string;
   value: number;
-  value2?: number; // Optional second value for multi-bar charts
+  value2?: number; 
 }
 
-// Define the interface for the props of DashboardCard
+
 interface DashboardCardProps {
   title: string;
   type: ChartType;
   data: DataPoint[];
-  chartProps?: object; // Optional: Additional props to pass to the chart
-  showLegend?: boolean; // Optional: Control legend visibility
+  chartProps?: object;
+  showLegend?: boolean; 
 }
 
 const DashboardCard: React.FC<DashboardCardProps> = ({
@@ -41,11 +41,11 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
   showLegend = true,
 }) => {
   
-  // Custom Legend Renderer
-  const renderCustomLegend = (props: DefaultLegendContentProps) => { // Use DefaultLegendContentProps
+
+  const renderCustomLegend = (props: DefaultLegendContentProps) => {
     const { payload } = props;
 
-    // Ensure payload is defined and has entries
+   
     if (!payload || !Array.isArray(payload)) return null;
 
     return (
@@ -63,7 +63,7 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
     );
   };
 
-  // Render the correct chart based on the type prop
+
   const renderChart = () => {
     switch (type) {
       case 'line':
