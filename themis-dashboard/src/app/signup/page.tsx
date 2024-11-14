@@ -8,7 +8,6 @@ import { userSignup } from "@/app/utils/userSignup";
 import { setCookie } from 'cookies-next';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 
-// Define validation schema using Yup
 const signupSchema = yup.object().shape({
   first_name: yup.string().required("First name is required"),
   last_name: yup.string().required("Last name is required"),
@@ -63,12 +62,12 @@ const Signup = () => {
     }
   };
 
-  // Toggle password visibility
+
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
 
-  // Toggle confirm password visibility
+
   const toggleConfirmPasswordVisibility = () => {
     setConfirmPasswordVisible(!confirmPasswordVisible);
   };

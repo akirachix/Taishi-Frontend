@@ -29,7 +29,7 @@ export const userSignup = async (userData: UserData) => {
             console.error('Full response from server:', text);
 
             if (response.status >= 500) {
-                throw new Error('We are experiencing technical difficulties. Please try again later.');
+                throw new Error('Network interrupted. Please try again later.');
             } else if (response.status === 400) {
                 throw new Error('An account with this email already exists. Please try logging in.');
             } else {

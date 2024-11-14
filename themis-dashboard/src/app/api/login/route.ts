@@ -3,13 +3,10 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function POST(request: NextRequest) {
   const baseUrl = process.env.BASE_URL;
 
-  // Validate environment variable
-
 
   try {
     const { email, password } = await request.json();
 
-    // Validate required fields
     if (!email || !password) {
       console.error('Validation failed: Missing email or password');
       return NextResponse.json(
@@ -18,7 +15,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Make the request to the backend API
     const response = await fetch(`${baseUrl}/api/login/`, {
       method: 'POST',
       headers: {
@@ -27,11 +23,9 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify({ email, password }),
     });
 
-    // Log the full response for debugging
     const textResponse = await response.text();
     console.log('Backend response:', textResponse, 'Status:', response.status);
 
-    // Handle errors from the backend API
     if (!response.ok) {
       try {
         const errorData = JSON.parse(textResponse);
@@ -40,7 +34,7 @@ export async function POST(request: NextRequest) {
           { status: response.status }
         );
       } catch (e) {
-        // If response is not valid JSON
+
         return NextResponse.json(
           { error: 'Unexpected response format from backend' },
           { status: response.status }
@@ -48,7 +42,6 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Parse the response and send it back to the client
     const result = JSON.parse(textResponse);
     console.log('User logged in successfully:', result);
     return NextResponse.json(result, { status: 200 });
