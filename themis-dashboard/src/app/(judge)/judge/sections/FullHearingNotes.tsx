@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { getSingleTranscription } from "@/app/utils/singleTranscription";
 import { formatDiarizationTextWithColors } from "@/app/utils/colorUtils";
+import { Hearing } from "../../../../../types";
 
 export default function FullHearingNotes({ transcriptionId }: { transcriptionId: number }) {
-  const [transcription, setTranscription] = useState<any>(null);
+  const [transcription, setTranscription] = useState<Hearing | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -27,7 +28,7 @@ export default function FullHearingNotes({ transcriptionId }: { transcriptionId:
   if (error) return <p className="text-red-500">{error}</p>;
 
   return (
-    <div className="max-h-[755px] overflow-y-auto">
+    <div className="max-h-[720px] overflow-y-auto">
       <div
         className="transcription-text"
         dangerouslySetInnerHTML={{

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { fetchDiarization } from "@/app/utils/diarization";
 import { formatDiarizationTextWithColors } from "@/app/utils/colorUtils";
+import { Speaker_tagging } from "../../../../../types";
 
 export default function SpeakerSection({ transcriptionId }: { transcriptionId: number }) {
-  const [diarization, setDiarization] = useState<any>(null);
+  const [diarization, setDiarization] = useState<Speaker_tagging| null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -27,7 +28,7 @@ export default function SpeakerSection({ transcriptionId }: { transcriptionId: n
   if (error) return <p className="text-red-500">{error}</p>;
 
   return (
-    <div className="max-h-[755px] overflow-y-auto">
+    <div className="max-h-[720px] overflow-y-auto">
       {diarization?.diarization_data ? (
         <div
           className="diarization-text"

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { Home, Briefcase, Calendar } from 'lucide-react';
+import { Home, Calendar } from 'lucide-react';
 import { useSidebar } from '@/app/(judge)/judge/hooks/useSidebar';
 
 const sidebarItems = [
@@ -31,9 +31,9 @@ const Sidebar = () => {
       <nav className="space-y-12 flex-grow mt-24 text-[24px] nh:mt-6 nh:text-[18px]">
         {sidebarItems.map((item) => (
           <div key={item.label} className="relative">
-            {/* Check if item.path is defined before calling handleNavigation */}
+         
             <button 
-              onClick={() => item.path && handleNavigation(item.path)} // Ensure item.path is defined
+              onClick={() => item.path && handleNavigation(item.path)} 
               className={`flex items-center p-2 w-full text-left transition-colors
                 ${activePath === item.path ? 'text-[#F99D15]' : 'text-white'}`}
             >

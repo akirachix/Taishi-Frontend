@@ -2,18 +2,18 @@
 
 import React from "react";
 import Image from "next/image";
-import { Home, Briefcase, Calendar } from "lucide-react";
+import { Home, Calendar } from "lucide-react";
 import { useSidebar } from "../../hooks/useSidebar";
 
-// Define the type for sidebar items
+
 type SidebarItem = {
-  icon: React.ElementType | null; // Icon component or null
-  label: string; // Display label for the item
-  path?: string; // Optional path for internal navigation
-  externalLink?: string; // Optional external link
+  icon: React.ElementType | null; 
+  label: string;
+  path?: string;
+  externalLink?: string; 
 };
 
-// Define the sidebar items
+
 const sidebarItems: SidebarItem[] = [
   { icon: Home, label: "Home", path: "/judge/" },
   { icon: Calendar, label: "Hearings", path: "/judge/hearings" },
@@ -22,7 +22,7 @@ const sidebarItems: SidebarItem[] = [
 ];
 
 const Sidebar = () => {
-  const { activePath, handleNavigation } = useSidebar(); // Destructure values from useSidebar hook
+  const { activePath, handleNavigation } = useSidebar();
 
   return (
     <div className="w-64 bg-[#083317] h-screen text-white p-4 flex flex-col">
@@ -59,7 +59,7 @@ const Sidebar = () => {
               </a>
             ) : (
               <button
-                onClick={() => item.path && handleNavigation(item.path)} // Ensure item.path is defined before calling handleNavigation
+                onClick={() => item.path && handleNavigation(item.path)} 
                 className={`flex items-center p-2 w-full text-left transition-colors
                   ${activePath === item.path ? "text-[#F99D15]" : "text-white"}`}
               >
@@ -74,7 +74,7 @@ const Sidebar = () => {
                 {item.label}
               </button>
             )}
-            {/* Active indicator line */}
+           
             <div
               className={`absolute bottom-0 left-9 right-0 w-2/4 h-0.5 ${
                 activePath === item.path ? "bg-yellow-600" : "bg-white"

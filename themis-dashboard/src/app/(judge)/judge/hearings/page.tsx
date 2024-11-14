@@ -1,10 +1,10 @@
 "use client";
 import React, { useState, useEffect, useMemo } from 'react';
 import Layout from "../Layout";
-import { useRouter } from 'next/navigation'; // Import useRouter hook
+import { useRouter } from 'next/navigation'; 
 import { fetchTranscriptions } from '@/app/utils/transcription';
 
-// Define the transcription interface
+
 interface Transcription {
   id: number; 
   case_name: string | null;
@@ -22,7 +22,7 @@ const HearingsDashboard: React.FC = () => {
 
   const router = useRouter(); 
 
-  // Fetch transcriptions from backend when the component loads
+ 
   useEffect(() => {
     const loadTranscriptions = async () => {
       try {
@@ -48,15 +48,14 @@ const HearingsDashboard: React.FC = () => {
     );
   }, [transcriptions, searchTerm]);
 
-  // Function to handle row click and navigate to transcription detail page
+
   const handleRowClick = (id: number) => {
-    router.push(`/judge/hearings/${id}`); // Navigate to transcription detail page
+    router.push(`/judge/hearings/${id}`);
   };
 
-  // Render transcription status with some styling
   const renderStatus = (status: string | null) => {
-    let color = "gray"; // Default color
-    let text = "Pending"; // Default text
+    let color = "gray";
+    let text = "Pending";
 
     switch (status) {
       case "in_progress":
@@ -94,12 +93,12 @@ const HearingsDashboard: React.FC = () => {
               placeholder="Search by case name, case number, or audio file..."
               className="flex-grow outline-none"
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)} // Set search term from user input
+              onChange={(e) => setSearchTerm(e.target.value)} 
             />
           </div>
 
-          {/* Make the table scrollable */}
-          <div className="max-h-[695px] overflow-y-auto"> {/* Add scrollable wrapper */}
+      
+          <div className="max-h-[695px] overflow-y-auto"> 
             {loading ? (
               <p>Loading transcriptions...</p>
             ) : error ? (
@@ -118,10 +117,10 @@ const HearingsDashboard: React.FC = () => {
                   {filteredTranscriptions.map((transcription, index) => (
                     <tr
                       key={index}
-                      onClick={() => handleRowClick(transcription.id)} // Handle row click
+                      onClick={() => handleRowClick(transcription.id)} 
                       className={`${
                         index % 2 === 0 ? "bg-white" : "bg-gray-200"
-                      } hover:bg-gray-400 cursor-pointer`} // Add pointer cursor and hover effect
+                      } hover:bg-gray-400 cursor-pointer`}
                     >
                       
                       <td className="p-2 sm:p-3">{transcription.case_number || "N/A"}</td>

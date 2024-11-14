@@ -155,7 +155,7 @@ const ProfilePage = () => {
                 {showModal && (
                     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
                         <div className="bg-white p-8 rounded-md w-[400px] relative">
-                            {/* <h2 className="text-lg font-semibold mb-4">Add Case Audio</h2> */}
+                           
 
                             <div className="mb-4">
                                 <label className="block text-sm mb-2">Case Name</label>

@@ -56,14 +56,14 @@ const JudgeDashboardPage = () => {
     loadCases();
   }, []);
 
-  // Handle file input change
+ 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       setAudioFile(e.target.files[0]);
     }
   };
 
-  // Handle adding audio for a case
+
   const handleAddCaseAudio = async () => {
     if (!audioFile) {
       setApiError("Please select an audio file.");
@@ -130,7 +130,6 @@ const JudgeDashboardPage = () => {
           </div>
         </main>
 
-        {/* Upload form for adding case (Modal) */}
         {showModal && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
             <div className="bg-white p-8 rounded-md w-[400px] relative">
@@ -157,7 +156,6 @@ const JudgeDashboardPage = () => {
                 </svg>
               </button>
 
-              {/* Case Name Input */}
               <div className="mb-4">
                 <label className="block text-sm mb-2">Case Name</label>
                 <input
@@ -169,7 +167,7 @@ const JudgeDashboardPage = () => {
                 />
               </div>
 
-              {/* Case Number Input */}
+             
               <div className="mb-4">
                 <label className="block text-sm mb-2">Case Number</label>
                 <input
@@ -181,7 +179,6 @@ const JudgeDashboardPage = () => {
                 />
               </div>
 
-              {/* Audio File Input */}
               <div className="mb-4">
                 <label className="block text-sm mb-2">Audio File</label>
                 <input
@@ -192,7 +189,7 @@ const JudgeDashboardPage = () => {
                 />
               </div>
 
-              {/* Display API error or success */}
+           
               {apiError && <p className="text-red-500 text-sm mb-4">{apiError}</p>}
               {uploadStatus && <p className="text-green-500 text-sm mb-4">{uploadStatus}</p>}
 
