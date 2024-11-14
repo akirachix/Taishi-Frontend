@@ -38,7 +38,6 @@ const HearingsDashboard: React.FC = () => {
     loadTranscriptions();
   }, []);
 
-  // Filter transcriptions based on search term
   const filteredTranscriptions = useMemo(() => {
     return transcriptions.filter(
       (transcription) =>

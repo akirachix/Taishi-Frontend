@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 const transcriptionUrl = process.env.THEMIS_URL;
-// Function to handle POST request (create transcription)
+
 export async function POST(request: NextRequest) {
   const formData = await request.formData();
   
@@ -13,13 +13,12 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    // POST to the Django backend (ensure you have the correct URL to your Django API)
+ 
     const response = await fetch(`${transcriptionUrl}/api/transcriptions/`, {
       method: "POST",
       body: formData,
     });
 
-    // If the response is not ok, throw an error
     if (!response.ok) {
       const errorData = await response.json();
       return NextResponse.json({ error: errorData.detail || 'Failed to create transcription' }, { status: response.status });

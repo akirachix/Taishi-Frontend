@@ -11,7 +11,6 @@ import { Button} from "@nextui-org/react";
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { FcGoogle } from 'react-icons/fc';
 
-// Define validation schema using Yup
 const loginSchema = yup.object().shape({
   email: yup.string().required("Email is required"),
   password: yup.string().min(6, "Password must be at least 6 characters").required("Password is required"),

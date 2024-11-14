@@ -22,7 +22,5 @@ export async function fetchTranscriptions() {
   }
   
 
-  // export default fetchCaseLaws;
-  
 
   

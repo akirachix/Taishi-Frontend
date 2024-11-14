@@ -40,9 +40,9 @@ const CaseSummarySection: React.FC<CaseSummarySectionProps> = ({
     try {
       setGenerating(true);
       setError(null);
-      // Generate new case brief
+     
       await createCaseBrief(transcriptionId);
-      // Fetch the updated case briefs
+      
       await fetchExistingCaseBrief();
     } catch (error) {
       console.error("Failed to generate case brief:", error);

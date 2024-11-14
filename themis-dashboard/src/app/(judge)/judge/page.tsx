@@ -135,7 +135,7 @@ const JudgeDashboardPage = () => {
             <div className="bg-white p-8 rounded-md w-[400px] relative">
               <h2 className="text-lg font-semibold mb-4">Add Case Audio</h2>
 
-              {/* Close button (X) */}
+            
               <button
                 onClick={() => setShowModal(false)}
                 className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"

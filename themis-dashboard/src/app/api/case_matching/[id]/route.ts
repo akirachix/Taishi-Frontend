@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
 const baseUrl = process.env.THEMIS_URL; 
 console.log('BASE_URL :', baseUrl);
 
-// 'GET' method
+
 
 export async function GET(request: Request, { params }: { params: { id: number } }) {
     try {
@@ -23,7 +23,7 @@ export async function GET(request: Request, { params }: { params: { id: number }
 };
 
 
-// 'POST' method
+
 
 export async function POST(request: Request, { params }: { params: { id: number } }) {
     try {

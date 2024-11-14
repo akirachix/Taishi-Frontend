@@ -43,7 +43,7 @@ export default function MatchingCasesSection ({
     }
   };
 
-  // Fetching existing case laws once 'Matching Cases' section is active
+
 
   useEffect(() => {
     if (isActive) {
@@ -74,7 +74,7 @@ export default function MatchingCasesSection ({
         <div className="max-h-[655px]">
           {caseLaws.length > 0 ? (
             <div className="flex gap-16 w-full">
-              {/* Left Column */}
+             
               <div className="w-full">
                 {caseLaws
                   .slice(0, Math.ceil(caseLaws.length / 2))

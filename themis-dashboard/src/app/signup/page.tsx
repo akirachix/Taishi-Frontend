@@ -62,12 +62,12 @@ const Signup = () => {
     }
   };
 
-  // Toggle password visibility
+
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
 
-  // Toggle confirm password visibility
+
   const toggleConfirmPasswordVisibility = () => {
     setConfirmPasswordVisible(!confirmPasswordVisible);
   };
