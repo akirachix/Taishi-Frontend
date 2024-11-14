@@ -22,3 +22,20 @@ export interface Hearing {
       }[];
     }[];
   }
+
+  export interface CaseLaw{
+    title: string;
+    link: string;
+  }
+
+  export interface CaseBrief{
+    generated_caseBrief : string
+  }
+
+  export interface Hearing{
+    transcription_text  : string
+  }
+
+  export interface Speaker_tagging{
+    diarization_data : string
+  }

@@ -1,8 +1,9 @@
 "use client";
-import React, { useState, useMemo } from "react";
-import { Search, Bell, User, ChevronLeft, ChevronRight } from "lucide-react";
+import React, { useState, useMemo, useEffect } from "react";
+import { Search, User, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import Layout from "../Layout";
+import Image from "next/image";
 
 
 const cases = [
@@ -104,21 +105,30 @@ const Cases = () => {
 
   const paginate = (pageNumber: React.SetStateAction<number>) => setCurrentPage(pageNumber);
 
+  const [avatar, setAvatar] = useState('/ladyjustice.png'); // Default avatar
+
+  useEffect(() => {
+    const storedAvatar = localStorage.getItem('avatar');
+    if (storedAvatar) {
+      setAvatar(storedAvatar);
+    }
+  }, []);
+  
   return (
     <Layout>
       <div className="p-4 sm:p-8 bg-white">
       
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
           <h1 className="text-xl sm:text-2xl font-bold text-[#F99D15] mb-4 sm:mb-0">Cases</h1>
-          <div className="flex items-center space-x-6">
-            <div className="relative bg-[#083317] p-2 rounded-full">
-              <Bell className="w-6 h-6 text-white" />
-              <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">27</span>
-            </div>
-            <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
-              <User className="w-6 h-6 text-gray-600" />
-            </div>
+          <div className="w-12 h-12 nh:w-8 nh:h-8 bg-gray-300 rounded-full flex items-center justify-center overflow-hidden">
+        {avatar ? (
+          <div>
+          <Image src={avatar} alt="User Avatar" className="w-full h-full object-cover" width={100} height={100} />
           </div>
+        ) : (
+          <User className=" nh:w-4 nh:h-4 text-gray-600" />
+        )}
+      </div>
         </div>
 
         <div className="bg-white rounded-lg shadow">

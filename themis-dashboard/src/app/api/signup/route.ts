@@ -6,7 +6,7 @@ export async function POST(request: NextRequest) {
   try {
     const { first_name, last_name, email, password, role } = await request.json();
 
-    // Validate required fields
+
     if (!first_name || !last_name || !email || !password || !role) {
       console.error('Validation failed: Missing fields');
       return NextResponse.json(
@@ -15,7 +15,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Make the request to the backend API
     const response = await fetch(`${baseUrl}/api/signup/`, {
       method: 'POST',
       headers: {
@@ -24,11 +23,10 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify({ first_name, last_name, email, password, role }),
     });
 
-    // Log the full response for debugging
     const textResponse = await response.text();
     console.log('Backend response:', textResponse, 'Status:', response.status);
 
-    // Handle errors from the backend API
+ 
     if (!response.ok) {
       try {
         const errorData = JSON.parse(textResponse);
