@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 const ProductMetrics = () => {
   const { metrics, loading, error } = useProductMetrics();
-  const [timeFilter, setTimeFilter] = useState(''); // Initially empty to show all graphs
+  const [timeFilter, setTimeFilter] = useState(''); 
 
   if (loading) {
     return (
@@ -24,7 +24,7 @@ const ProductMetrics = () => {
     );
   }
 
-  // Check if metrics is null before rendering
+
   if (!metrics) {
     return (
       <div className="flex items-center justify-center w-full h-screen p-5">
@@ -33,10 +33,9 @@ const ProductMetrics = () => {
     );
   }
 
-  // Function to render the selected chart or all charts initially
   const renderCharts = () => {
     if (!timeFilter) {
-      // Show all charts when no filter is selected
+   
       return (
         <>
           <DashboardCard title="Active Users" type="bar" data={metrics.activeUsers} showLegend={true} />
@@ -47,7 +46,6 @@ const ProductMetrics = () => {
       );
     }
 
-    // Render the selected chart based on the filter
     switch (timeFilter) {
       case 'Active Users':
         return <DashboardCard title="Active Users" type="bar" data={metrics.activeUsers} showLegend={true} />;
@@ -73,7 +71,7 @@ const ProductMetrics = () => {
               value={timeFilter}
               onChange={(e) => setTimeFilter(e.target.value)}
             >
-              <option value="">All Metrics</option> {/* Option to reset and show all graphs */}
+              <option value="">All Metrics</option>
               <option value="Active Users">Active Users</option>
               <option value="Number of Signups">Number of Signups</option>
               <option value="Generated Casebriefs">Generated Casebriefs</option>
