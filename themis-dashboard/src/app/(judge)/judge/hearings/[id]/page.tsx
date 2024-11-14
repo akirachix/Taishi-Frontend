@@ -1,139 +1,399 @@
 
+// "use client";
 
-'use client';
+// import React, { useState, useEffect } from "react";
+// import { useRouter } from "next/navigation";
+// import { AlertCircle, ArrowLeft } from "lucide-react";
+// import tinycolor from "tinycolor2";
+// import Layout from "@/app/Layout";
+// import Link from "next/link";
+// import { getSingleTranscription } from "@/app/utils/singleTranscription";
+// import { fetchDiarization } from "@/app/utils/diarization";
+// import { fetchCaseBrief } from "@/app/utils/caseBrief";
+// import { fetchCaseLaw } from "@/app/utils/caseMatching";
+// import handleDownloadCaseBrief from "@/app/utils/download_casebrief";
+// import { CaseLaw } from "../../../../../../types";
 
-import React from 'react';
-import { useRouter } from 'next/navigation';
+// export default function HearingDetailPage({
+//   params,
+// }: {
+//   params: { id: string };
+// }) {
+//   const router = useRouter();
+//   const transcriptionId = parseInt(params.id);
+//   const [transcription, setTranscription] = useState<any>(null);
+//   const [diarization, setDiarization] = useState<any>(null);
+//   const [caseBriefs, setCaseBriefs] = useState<any>(null);
+//   const [caseLaws, setCaseLaws] = useState<any>(null);
+//   const [loading, setLoading] = useState(true);
+//   const [error, setError] = useState<string | null>(null);
+//   const [activeSection, setActiveSection] = useState("Full Hearing Notes");
 
-import { AlertCircle, ArrowLeft } from 'lucide-react';
-import Layout from '../../Layout';
+//   // Fetch transcription, diarization, and case brief data when component mounts
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       try {
+//         setLoading(true);
+//         const transcriptionData = await getSingleTranscription(transcriptionId);
+//         const diarizationData = await fetchDiarization(transcriptionId);
+//         const caseBriefsData = await fetchCaseBrief(transcriptionId);
+//         const caseLawsData = await fetchCaseLaw(transcriptionId);
 
-interface Hearing {
-  id: number; 
-  caseNo: string;
-  title: string;
-  accuracy: string;
-  date: string;
-  time: string;
-  status: string;
-}
+//         setTranscription(transcriptionData);
+//         setDiarization(diarizationData);
+//         setCaseBriefs(caseBriefsData);
+//         setCaseLaws(caseLawsData.case);
+//       } catch (error) {
+//         setError(
+//           "Failed to fetch transcription, diarization, or case brief data"
+//         );
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
 
-interface HearingData {
-  title: string;
-  applicationNo: string;
-  court: string;
-  judges: string;
-  date: string;
-  reportedBy: string;
-};
+//     fetchData();
+//   }, [transcriptionId]);
 
-interface TranscriptionSpeaker {
-  name: string;
-  text: string;
-};
+//   const handleDownload = async () => {
+//     try {
+//       await handleDownloadCaseBrief(transcriptionId);
+//     } catch (error) {
+//       setError("Failed to download case brief");
+//     }
+//   };
 
-interface TranscriptionPart {
-  part: number;
-  duration: string;
-  speakers: TranscriptionSpeaker[];
-};
+//   const handleGenerateCaseBrief = async () => {
+//     try {
+//       setLoading(true);
+//       const updatedCaseBriefs = await fetchCaseBrief(transcriptionId);
+//       setCaseBriefs(updatedCaseBriefs); 
+//       setLoading(false);
+//     } catch (error) {
+//       setError("Failed to generate case brief");
+//       setLoading(false);
+//     }
+//   };
 
-const hearings: Hearing[] = [
-  {
-    id: 1,
-    caseNo: "CASE22465",
-    title: "Irungii Khoikho Khamati",
-    accuracy: "80%",
-    date: "26th August 2023",
-    time: "22:45hrs",
-    status: "OPEN CASE",
-  },
-];
+//   const generateRandomColor = (): string => {
+//     return tinycolor.random().toHexString();
+//   };
 
-const hearingData: HearingData = {
-  title: "Jowie Irungu vs Monica Kimani",
-  applicationNo: "4013/07",
-  court: "Milimani Law Courts",
-  judges: "A Nussburger P & J. K Huiyee, E Mesa, A Potoch",
-  date: "September 6, 2018",
-  reportedBy: "Faith Wanjika and Betty Nkuitje"
-};
+//   const getColorForSpeaker = (
+//     speaker: string,
+//     speakerColorMap: { [key: string]: string }
+//   ) => {
+//     if (!speakerColorMap[speaker]) {
+//       speakerColorMap[speaker] = generateRandomColor();
+//     }
+//     return speakerColorMap[speaker];
+//   };
 
-const transcriptionData: TranscriptionPart[] = [
-  {
-    part: 1,
-    duration: '1st 20 minutes',
-    speakers: [
-      { name: 'Speaker 1', text: 'Live Transcription Live Transcription Live\nTranscription Live Transcription\nLive Transcription Live Transcription\nLive Transcription Live Transcription' },
-      { name: 'Speaker 2', text: 'Live Transcription Live Transcription Live\nTranscription Live Transcription\nLive Transcription Live Transcription\nLive Transcription Live Transcription' },
-    ]
-  },
-  {
-    part: 2,
-    duration: '1st 20 minutes',
-    speakers: [
-      { name: 'Speaker 1', text: 'Live Transcription Live Transcription Live\nTranscription Live Transcription\nLive Transcription Live Transcription\nLive Transcription Live Transcription' },
-      { name: 'Speaker 2', text: 'Live Transcription Live Transcription Live\nTranscription Live Transcription\nLive Transcription Live Transcription\nLive Transcription Live Transcription' },
-    ]
-  },
-];
+//   const formatDiarizationTextWithColors = (text: string) => {
+//     if (!text) return "";
 
-export default function HearingDetailPage({ params }: { params: { id: string } }) {
+//     const speakerColorMap: { [key: string]: string } = {};
+//     const colorizedText = text.replace(/(Speaker\s\d+:)/g, (match, speaker) => {
+//       const color = getColorForSpeaker(speaker, speakerColorMap);
+//       return `<strong style="color: ${color};">${speaker}</strong>`;
+//     });
+
+//     const paragraphs = colorizedText.split(/\n+/).map((paragraph, index) => {
+//       return `<p key=${index} style="color: black; margin-bottom: 16px; font-size:25px;">${paragraph}</p>`;
+//     });
+
+//     return paragraphs.join("");
+//   };
+
+//   if (loading) {
+//     return (
+//       <Layout>
+//         <p>Loading...</p>
+//       </Layout>
+//     );
+//   }
+
+//   if (error) {
+//     return (
+//       <Layout>
+//         <div className="flex items-center mb-2">
+//           <button onClick={() => router.back()} className="mr-4">
+//             <ArrowLeft className="text-[#F99D15]" />
+//           </button>
+//           <h1 className="text-xl font-bold text-[#F99D15]">Hearings</h1>
+//         </div>
+//         <div className="flex flex-col items-center justify-center mt-52 p-4">
+//           <AlertCircle className="w-16 h-16 text-red-500 mb-4" />
+//           <p className="text-xl font-semibold text-gray-800 text-center">
+//             {error}
+//           </p>
+//         </div>
+//       </Layout>
+//     );
+//   }
+
+//   return (
+//     <Layout>
+//       <div className="md:p-8 bg-white">
+//         <div className="flex items-center mb-2">
+//           <button onClick={() => router.back()} className="mr-4">
+//             <ArrowLeft className="text-[#F99D15]" />
+//           </button>
+//           <h1 className="text-xl md:text-2xl font-bold text-[#F99D15]">
+//             Hearings
+//           </h1>
+//         </div>
+
+//         <div className="flex gap-[8%] border-b">
+//           {[
+//             "Full Hearing Notes",
+//             "What Speakers Said",
+//             "Hearing Case Summary",
+//             "Matching Cases",
+//           ].map((section) => (
+//             <button
+//               key={section}
+//               className={`py-2 px-4 font-semibold text-[20px] ${
+//                 activeSection === section
+//                   ? "text-orange-500 border-b-2 border-orange-500"
+//                   : "text-black"
+//               }`}
+//               onClick={() => setActiveSection(section)}
+//             >
+//               {section}
+//             </button>
+//           ))}
+//         </div>
+
+//         <div className="mt-4">
+//           {activeSection === "Full Hearing Notes" && (
+//             <div className="max-h-[755px] overflow-y-auto">
+//               <div
+//                 className="transcription-text"
+//                 dangerouslySetInnerHTML={{
+//                   __html: formatDiarizationTextWithColors(
+//                     transcription.transcription_text ||
+//                       "Transcription does not exist"
+//                   ),
+//                 }}
+//               />
+//             </div>
+//           )}
+
+//           {activeSection === "What Speakers Said" && (
+//             <div className="max-h-[755px] overflow-y-auto">
+//               {diarization?.diarization_data ? (
+//                 <div
+//                   className="diarization-text"
+//                   dangerouslySetInnerHTML={{
+//                     __html: formatDiarizationTextWithColors(
+//                       diarization.diarization_data
+//                     ),
+//                   }}
+//                 />
+//               ) : (
+//                 <p>No diarization data available.</p>
+//               )}
+//             </div>
+//           )}
+
+//           {activeSection === "Hearing Case Summary" && (
+//             <>
+//               <div className="max-h-[655px] overflow-y-auto">
+//                 {caseBriefs.length > 0 ? (
+//                   <div>
+//                     {caseBriefs.map((caseBrief:any, index:number) => (
+//                       <div
+//                         key={index}
+//                         className="mb-4 p-2 border-b border-gray-300"
+//                       >
+//                         <h2 className="font-semibold">
+//                           Case Brief {index + 1}
+//                         </h2>
+//                         <p>
+//                           {caseBrief.generated_caseBrief ||
+//                             "Case brief content not available"}
+//                         </p>
+//                       </div>
+//                     ))}
+//                   </div>
+//                 ) : (
+//                   <div>
+//                     <p>No case brief available for this hearing.</p>
+//                     <button
+//                       onClick={handleGenerateCaseBrief}
+//                       className="mt-4 bg-orange-500 text-white px-4 py-2 rounded-md"
+//                     >
+//                       Generate Case Brief
+//                     </button>
+//                   </div>
+//                 )}
+//               </div>
+//               <button
+//                 onClick={handleDownload}
+//                 className="mt-4 ml-[20%] w-[50%] bg-orange-700 text-white py-4 px-4 rounded hover:bg-orange-800 transition-colors"
+//               >
+//                 Download Case Brief as PDF
+//               </button>
+//             </>
+//           )}
+
+//           {activeSection === "Matching Cases" && (
+//             <div className="grid grid-cols-1 gap-4 mt-24 px-4">
+//               <div className="space-y-4">
+//                 <div className="max-h-[655px]">
+//                   {caseLaws.length > 0 ? (
+//                     <div className="flex gap-16 w-full">
+
+//                       {/* Left Column */}
+//                       <div className="w-full">
+//                         {caseLaws
+//                           .slice(0, Math.ceil(caseLaws.length / 2))
+//                           .map((caseLaw: CaseLaw, index:number) => (
+//                             <div
+//                               key={index}
+//                               className={`mb-4 p-4 rounded-md ${
+//                                 index % 2 === 0
+//                                   ? "bg-[#B5D3F1]"
+//                                   : "bg-[#D9E5F2]"
+//                               }`}
+//                             >
+//                               <Link
+//                                 href={caseLaw.link}
+//                                 target="_blank"
+//                                 rel="noopener noreferrer"
+//                               >
+//                                 <h2 className="text-sm font-medium">
+//                                   {caseLaw.title}
+//                                 </h2>
+//                               </Link>
+//                             </div>
+//                           ))}
+//                       </div>
+
+//                       {/* Right Column */}
+//                       <div className="w-full">
+//                         {caseLaws
+//                           .slice(Math.ceil(caseLaws.length / 2))
+//                           .map((caseLaw:CaseLaw, index:number) => (
+//                             <div
+//                               key={index}
+//                               className={`mb-4 p-4 rounded-md ${
+//                                 index % 2 === 0
+//                                   ? "bg-[#B5D3F1]"
+//                                   : "bg-[#D9E5F2]"
+//                               }`}
+//                             >
+//                               <Link
+//                                 href={caseLaw.link}
+//                                 target="_blank"
+//                                 rel="noopener noreferrer"
+//                               >
+//                                 <h2 className="text-sm font-medium">
+//                                   {caseLaw.title}
+//                                 </h2>
+//                               </Link>
+//                             </div>
+//                           ))}
+//                       </div>
+//                     </div>
+//                   ) : (
+//                     <div>
+//                       <p>No case laws available for this hearing.</p>
+//                       <button
+//                         onClick={handleGenerateCaseBrief}
+//                         className="mt-4 bg-orange-500 text-white px-4 py-2 rounded-md"
+//                       >
+//                         Generate Case Laws
+//                       </button>
+//                     </div>
+//                   )}
+//                 </div>
+//               </div>
+//             </div>
+//           )}
+//         </div>
+//       </div>
+//     </Layout>
+//   );
+// }
+
+
+"use client";
+
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { AlertCircle, ArrowLeft } from "lucide-react";
+import Layout from "@/app/Layout";
+import FullHearingNotes from "../../sections/FullHearingNotes";
+import SpeakerSection from "../../sections/SpeakerSection";
+import CaseSummarySection from "../../sections/CaseSummarySection";
+import MatchingCasesSection from "../../sections/MatchingCasesSection";
+
+export default function HearingDetailPage({
+  params,
+}: {
+  params: { id: string };
+}) {
   const router = useRouter();
-  const hearingId = parseInt(params.id); 
-  const caseDetail = hearings.find((hearing) => hearing.id === hearingId);
-  console.log({params});
+  const transcriptionId = parseInt(params.id);
+  const [activeSection, setActiveSection] = useState("Full Hearing Notes");
 
-  if (!caseDetail) {
-    return (
-    <Layout>
-      <div className="flex items-center mb-2 nh:pb-40">
-          <button onClick={() => router.back()} className="mr-4">
-            <ArrowLeft className="text-[#F99D15]" />
-          </button>
-          <h1 className="text-xl nh:text-xl font-bold text-[#F99D15]">Hearings</h1>
-        </div>
-      <div className="flex flex-col items-center justify-center mt-52 p-4 nh:mt-12">
-        <AlertCircle className="w-16 h-16 text-red-500 mb-4" />
-        <p className="text-xl font-semibold text-gray-800 text-center">Case not found</p>
-      </div>
-    </Layout>
-    );
-  }
+  const sections = [
+    "Full Hearing Notes",
+    "What Speakers Said",
+    "Hearing Case Summary",
+    "Matching Cases",
+  ];
 
   return (
     <Layout>
-      <div className="p-4 md:p-8 bg-white nh:p-1">
-        <div className="flex items-center mb-6 nh:mb-0 nh:mt-0">
+      <div className="md:p-8 bg-white">
+        <div className="flex items-center mb-2">
           <button onClick={() => router.back()} className="mr-4">
             <ArrowLeft className="text-[#F99D15]" />
           </button>
-          <h1 className="text-xl md:text-2xl font-bold text-[#F99D15]">Hearings</h1>
+          <h1 className="text-xl md:text-2xl font-bold text-[#F99D15]">
+            Hearings
+          </h1>
         </div>
 
-        <div className="bg-gray-200 p-4 mb-6 rounded-lg nh:mb-0">
-          <h2 className="font-bold text-lg md:text-xl mb-2 nh:text-md">{caseDetail.title}</h2>
-          <p className="text-sm md:text-base nh:text-[12px]">Case No: {caseDetail.caseNo}</p>
-          <p className="text-sm md:text-base nh:text-[12px]">Application No. {hearingData.applicationNo}</p>
-          <p className="text-sm md:text-base nh:text-[12px]">{hearingData.court}</p>
-          <p className="text-sm md:text-base mt-2 nh:text-[12px] nh:mt-0">{hearingData.judges}</p>
-          <p className="text-sm md:text-base nh:text-[12px]">{caseDetail.date} {caseDetail.time}</p>
-          <p className="text-sm md:text-base nh:text-[12px]">Status: {caseDetail.status}</p>
-          <p className="text-sm md:text-base nh:text-[12px]">Reported by {hearingData.reportedBy}</p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 nh:h-10 nh:gap-2 nh:text-[12px]">
-          {transcriptionData.map((part, index) => (
-            <div key={index} className="border p-3 md:p-4 rounded-lg">
-              <h3 className="font-bold mb-2 text-base md:text-lg">Part {part.part} ({part.duration})</h3>
-              {part.speakers.map((speaker, speakerIndex) => (
-                <div key={speakerIndex} className="mb-3 md:mb-4">
-                  <p className="font-semibold text-sm md:text-base">{speaker.name}:</p>
-                  <p className="whitespace-pre-line text-xs md:text-sm">{speaker.text}</p>
-                </div>
-              ))}
-            </div>
+        <div className="flex gap-[8%] border-b">
+          {sections.map((section) => (
+            <button
+              key={section}
+              className={`py-2 px-4 font-semibold text-[20px] ${
+                activeSection === section
+                  ? "text-orange-500 border-b-2 border-orange-500"
+                  : "text-black"
+              }`}
+              onClick={() => setActiveSection(section)}
+            >
+              {section}
+            </button>
           ))}
+        </div>
+
+        <div className="mt-4">
+          {activeSection === "Full Hearing Notes" && (
+            <FullHearingNotes transcriptionId={transcriptionId} />
+          )}
+
+          {activeSection === "What Speakers Said" && (
+            <SpeakerSection transcriptionId={transcriptionId} />
+          )}
+
+          {activeSection === "Hearing Case Summary" && (
+            <CaseSummarySection 
+            transcriptionId={transcriptionId}
+            isActive={activeSection== "Hearing Case Summary"} />
+          )}
+
+          {activeSection === "Matching Cases" && (
+            <MatchingCasesSection 
+            transcriptionId={transcriptionId}
+            isActive={activeSection== "Matching Cases"} />
+          )}
         </div>
       </div>
     </Layout>

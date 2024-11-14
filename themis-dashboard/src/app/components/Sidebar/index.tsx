@@ -1,17 +1,15 @@
-
-
 'use client';
 
 import React from 'react';
 import Image from 'next/image';
-import { Home, Briefcase, Calendar,} from 'lucide-react';
+import { Home, Briefcase, Calendar } from 'lucide-react';
 import { useSidebar } from '@/app/(judge)/judge/hooks/useSidebar';
 
 const sidebarItems = [
   { icon: Home, label: 'Home', path: '/judge/' },
-  { icon: Briefcase, label: 'Cases', path: '/judge/cases' },
   { icon: Calendar, label: 'Hearings', path: '/judge/hearings' },
   { icon: null, label: 'Profile', path: '/judge/profile' },
+  { icon: null, label: "About", externalLink: "https://themis-informational.vercel.app/" },
 ];
 
 const Sidebar = () => {
@@ -33,8 +31,9 @@ const Sidebar = () => {
       <nav className="space-y-12 flex-grow mt-24 text-[24px] nh:mt-6 nh:text-[18px]">
         {sidebarItems.map((item) => (
           <div key={item.label} className="relative">
+            {/* Check if item.path is defined before calling handleNavigation */}
             <button 
-              onClick={() => handleNavigation(item.path)}
+              onClick={() => item.path && handleNavigation(item.path)} // Ensure item.path is defined
               className={`flex items-center p-2 w-full text-left transition-colors
                 ${activePath === item.path ? 'text-[#F99D15]' : 'text-white'}`}
             >
@@ -53,5 +52,3 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
-
-

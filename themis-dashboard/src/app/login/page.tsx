@@ -5,9 +5,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useRouter } from "next/navigation";
 import { userLogin } from "../utils/userLogin";
-import { getCookie } from 'cookies-next';
+import { getCookie,setCookie } from 'cookies-next';
 import Link from "next/link";
-import { Button } from "@nextui-org/react";
+import { Button} from "@nextui-org/react";
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { FcGoogle } from 'react-icons/fc';
 
@@ -39,6 +39,7 @@ const Login = () => {
         
       
         const role = getCookie('userRole'); 
+        setCookie('userData', JSON.stringify(response.user), { path: '/' });
 
         if (role === 'judge') {
           setTimeout(() => router.push("/judge/"), 1500); 
@@ -51,7 +52,7 @@ const Login = () => {
     }
   };
 
-  // Toggle the password visibility
+
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
@@ -131,8 +132,6 @@ const Login = () => {
             </Button>
           </Link>
           <p>Don&#39;t have an account? <a href="/signup" className="text-green-700 hover:underline">Sign Up</a></p>
-            <a href="/api/auth/logout"> Logout</a>
-            {/* <div>User : {JSON.stringify(user)}</div> */}
 
           </div>
         </div>
