@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Layout from './Layout';
 import { fetchTranscriptions, createTranscription } from '@/app/utils/transcription';
 import Link from 'next/link';
+import { getCookie } from 'cookies-next';
 
 interface Transcription {
   id: number;
@@ -86,6 +87,9 @@ const JudgeDashboardPage = () => {
     }
   };
 
+  const userData = JSON.parse(getCookie("userData") || "{}");
+  const firstName = userData.first_name || "Guest";
+
   return (
     <Layout>
       <div className="bg-white flex flex-col">
@@ -95,7 +99,7 @@ const JudgeDashboardPage = () => {
 
         <main className="flex-grow flex flex-col">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-semibold mb-6">Welcome Guest</h2>
+            <h2 className="text-4xl font-semibold mb-6">Welcome {firstName}</h2>
             <p className="text-xl mb-6">Add hearing audio file.</p>
             <div className="flex justify-center mb-12">
               <button
