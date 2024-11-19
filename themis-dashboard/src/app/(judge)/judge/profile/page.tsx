@@ -3,8 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../Layout";
 import { FaClipboardCheck, FaClock, FaEdit } from 'react-icons/fa';
-import { createTranscription } from '@/app/utils/transcription';
-import { fetchTranscriptions } from '@/app/utils/transcription';
+import { createTranscription, fetchTranscriptions  } from '@/app/utils/transcription';
 import Image from "next/image";
 import { getCookie } from 'cookies-next';
 import Link from "next/link";
@@ -69,9 +68,8 @@ const ProfilePage = () => {
         const loadCases = async () => {
           try {
             const data = await fetchTranscriptions();
-            // Sort cases by date and pick the top 3 recent ones
             const sortedCases = data.sort((a: { date_created: string | number | Date; }, b: { date_created: string | number | Date; }) => new Date(b.date_created).getTime() - new Date(a.date_created).getTime());
-            setCases(sortedCases.slice(0, 3)); // Get the top 3 cases
+            setCases(sortedCases.slice(0, 3)); 
           } catch (err) {
             console.error('Error fetching recent cases:', err);
             setError(error as Error); 
