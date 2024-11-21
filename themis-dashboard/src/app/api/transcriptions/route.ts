@@ -35,6 +35,7 @@ export async function POST(request: NextRequest) {
 
 export async function GET() {
     const transcriptionUrl = process.env.THEMIS_URL;
+    console.log({transcriptionUrl})
 
     try {
         const response = await fetch(`${transcriptionUrl}/api/transcriptions/`, {
