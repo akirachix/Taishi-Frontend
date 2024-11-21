@@ -23,18 +23,8 @@ export default function MatchingCasesSection ({
       console.log('I am loading');
       
       const data = await fetchCaseLaw(transcriptionId);
-
-      console.log('data generated', data);
-      console.log('DATA:', data.case.related_cases);
       
-      const transformedCaseLaws = data.case.related_cases.map(([title, link]: [string, string]) => ({
-        title,
-        link,
-      }));
-  
-      console.log('Transformed CaseLaws:', transformedCaseLaws);
-  
-      setCaseLaws(transformedCaseLaws);
+      setCaseLaws(data.case.related_cases);
     } catch (error) {
       console.error("Error fetching case laws:", error);
       setError("Failed to fetch matching cases");
