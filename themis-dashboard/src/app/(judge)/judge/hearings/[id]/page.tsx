@@ -4,17 +4,17 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import {  ArrowLeft } from "lucide-react";
-import Layout from "@/app/Layout";
 import FullHearingNotes from "../../sections/FullHearingNotes";
 import SpeakerSection from "../../sections/SpeakerSection";
 import CaseSummarySection from "../../sections/CaseSummarySection";
 import MatchingCasesSection from "../../sections/MatchingCasesSection";
+import RootLayout from "../../Layout";
 
 export default function HearingDetailPage({
   params,
-}: {
+}: Readonly<{
   params: { id: string };
-}) {
+}>) {
   const router = useRouter();
   const transcriptionId = parseInt(params.id);
   const [activeSection, setActiveSection] = useState("Full Hearing Notes");
@@ -27,7 +27,7 @@ export default function HearingDetailPage({
   ];
 
   return (
-    <Layout>
+    <RootLayout>
       <div className="md:p-8 bg-white">
         <div className="flex items-center mb-2">
           <button onClick={() => router.back()} className="mr-4">
@@ -76,6 +76,6 @@ export default function HearingDetailPage({
           )}
         </div>
       </div>
-    </Layout>
+    </RootLayout>
   );
 }
